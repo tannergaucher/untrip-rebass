@@ -1,0 +1,36 @@
+scalar DateTime
+
+type SuccessMessage {
+  message: String
+}
+
+type Query {
+  me: User
+  events: [Event!]!
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String): AuthPayload!
+  signin(email: String!, password: String!): AuthPayload!
+  signout: SuccessMessage
+  addEvent(postId: Int!): Event
+  removeEvent(postId: Int!): Event
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Event {
+  postId: Int!
+  users: [User!]
+}
+
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  name: String
+  events: [Event!]
+}

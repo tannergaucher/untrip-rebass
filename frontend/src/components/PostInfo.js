@@ -1,11 +1,15 @@
 import React from "react"
-import { Flex } from "rebass"
+import { Flex, Box } from "rebass"
 import Info from "./styles/Info"
+import Social from "../components/Social"
 
 const PostInfo = ({ category, neighborhood }) => (
-  <Flex>
-    <Info>{category}</Info>
-    {neighborhood && <Info>{neighborhood}</Info>}
+  <Flex justifyContent="space-between">
+    <Box>
+      <Info>{category}</Info>
+      {neighborhood && <Info>{neighborhood}</Info>}
+    </Box>
+    <Social />
   </Flex>
 )
 

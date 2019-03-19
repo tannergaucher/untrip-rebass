@@ -1,29 +1,64 @@
 import React from "react"
-import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
+import { Grommet, Carousel } from "grommet"
+import { Button } from "rebass"
 
+import Layout from "../components/layout"
 import Map from "../components/Map"
+import Container from "../components/styles/Container"
+import Link from "../components/styles/Link"
 
 const placePage = ({ data }) => {
   const {
     name,
-    id,
-    address: { lat, lon },
+    description,
+    website,
+    facebook,
+    instagram,
+    openingHours,
+    closingHours,
+    dateTimeCaveats,
+    address: { lon, lat },
+    type: { placeType },
+    location: { city, neighborhood },
+    post_,
     carouselImages,
   } = data.place
 
   return (
     <Layout>
-      <>
-        {carouselImages.map(image => (
-          <Img
-            fluid={image.fluid}
-            style={{ height: "100px", width: "100px" }}
-            key={id}
-          />
-        ))}
+      <Container width={[1]}>
+        <Grommet>
+          <Carousel>
+            {carouselImages.map(image => (
+              <Img fluid={image.fluid} style={{ height: "225px" }} />
+            ))}
+          </Carousel>
+        </Grommet>
+
         <h1>{name}</h1>
+        <p>{description}</p>
+        <Button bg="black">+ Add to list</Button>
+        <p>{website}</p>
+        <p>{facebook}</p>
+        <p>{instagram}</p>
+        <p>{openingHours}</p>
+        <p>{closingHours}</p>
+        <p>{dateTimeCaveats}</p>
+        <p>{placeType}</p>
+        <p>{city}</p>
+        <p>{neighborhood}</p>
+
+        <h5>In these posts: </h5>
+        {post_.map(post => (
+          <>
+            <Link to={post.slug}>
+              <h4>{post.title}</h4>
+            </Link>
+          </>
+        ))}
+
         <Map
           name={name}
           title={name}
@@ -32,7 +67,7 @@ const placePage = ({ data }) => {
           style={{ height: "40%" }}
           zoom={15}
         />
-      </>
+      </Container>
     </Layout>
   )
 }
@@ -43,10 +78,27 @@ export const placePageQuery = graphql`
   query($name: String!) {
     place: contentfulPlace(name: { eq: $name }) {
       name
-      id
+      description
+      website
+      facebook
+      instagram
+      openingHours
+      closingHours
+      dateTimeCaveats
       address {
-        lat
         lon
+        lat
+      }
+      type {
+        placeType
+      }
+      location {
+        city
+        neighborhood
+      }
+      post_ {
+        title
+        slug
       }
       carouselImages {
         fluid {

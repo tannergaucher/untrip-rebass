@@ -1,47 +1,52 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Container from "../components/styles/Container"
 import Layout from "../components/layout"
-import Post from "../components/Post"
+import Subcategory from "../components/Subcategory"
 
-const categoryTemplate = ({ data }) => {
+const categoryPage = ({ data }) => {
   const { category, post_ } = data.contentfulCategory
 
   return (
     <Layout>
-      <h2>{category}</h2>
+      <Container width={1}>
+        <h2>{category}</h2>
+        {post_.map(post => {
+          const { subcategory: subcategories } = post
 
-      {post_.map(post => {
-        const {
-          id,
-          title,
-          introSentence,
-          cardImage: { fluid },
-        } = post
-
-        return (
-          <Post title={title} intro={introSentence} fluid={fluid} key={id} />
-        )
-      })}
+          return subcategories.map(subcategory => {
+            const {
+              subcategory: title,
+              subcategoryImage: { fluid },
+            } = subcategory
+            return (
+              <Subcategory
+                category={category}
+                subcategory={title}
+                fluid={fluid}
+              />
+            )
+          })
+        })}
+      </Container>
     </Layout>
   )
 }
 
-export default categoryTemplate
+export default categoryPage
 
-export const categoryTemplateQuery = graphql`
+export const categoryPageQuery = graphql`
   query($category: String!) {
     contentfulCategory(category: { eq: $category }) {
       category
       post_ {
-        id
-        title
-        published
-        slug
-        introSentence
-        cardImage {
-          fluid {
-            ...GatsbyContentfulFluid
+        subcategory {
+          subcategory
+          subcategoryImage {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
           }
         }
       }

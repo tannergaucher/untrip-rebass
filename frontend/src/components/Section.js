@@ -1,8 +1,10 @@
 import React from "react"
 import { Heading, Flex } from "rebass"
+import { kebabCase } from "lodash"
 
 import Brand from "../components/styles/Brand"
 import Divider from "../components/styles/Divider"
+import Link from "../components/styles/Link"
 
 const Section = ({ title, children }) => (
   <Flex flexDirection="column">
@@ -12,12 +14,12 @@ const Section = ({ title, children }) => (
     <Divider />
     {children}
     <Heading
+      my={[3]}
       fontSize={[1, 2]}
       fontWeight="900"
-      color="grey"
       style={{ textTransform: "uppercase" }}
     >
-      More {title}
+      <Link to={`/${kebabCase(title)}`}>More {title}</Link>
     </Heading>
   </Flex>
 )

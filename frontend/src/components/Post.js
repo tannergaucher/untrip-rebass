@@ -1,32 +1,42 @@
 import React from "react"
 import { Flex, Box, Card } from "rebass"
-import Img from "gatsby-image"
-
+import { Grommet, Carousel } from "grommet"
+import Image from "../components/styles/Image"
 import PostTitle from "./styles/PostTitle"
 import PostSubtitle from "./styles/PostSubtitle"
 import PostInfo from "./PostInfo"
-import Social from "./Social"
+import Link from "../components/styles/Link"
 
-const Post = ({ title, intro, category, neighborhood, date, fluid }) => {
-  console.log(category)
-
+const Post = ({
+  title,
+  intro,
+  category,
+  neighborhood,
+  date,
+  carouselImages,
+  slug,
+}) => {
   return (
     <Card
       flexDirection="column"
-      mt={[4, 5]}
-      mb={[4, 5]}
+      my={[4]}
       boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
       borderRadius="2px"
     >
-      <Img fluid={fluid} />
-      <Flex justifyContent="space-between" alignItems="flex-end" p={3}>
-        <Box>
+      <Grommet>
+        <Carousel>
+          {carouselImages.map(image => (
+            <Image fluid={image.fluid} style={{ height: "225px" }} />
+          ))}
+        </Carousel>
+      </Grommet>
+
+      <Flex flexDirection="column" justifyContent="space-between" p={3}>
+        <Link to={slug}>
           <PostInfo category={category} neighborhood={neighborhood} />
-          <PostTitle>{title}</PostTitle>
+          <PostTitle fontSize={[3, 4, 5]}>{title}</PostTitle>
           <PostSubtitle>{intro}</PostSubtitle>
-          <PostSubtitle>{date}</PostSubtitle>
-        </Box>
-        <Social />
+        </Link>
       </Flex>
     </Card>
   )

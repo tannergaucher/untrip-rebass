@@ -12,18 +12,15 @@ import {
 } from "grommet-icons"
 
 const InstagramIcon = styled(Instagram)`
-  ${space}
-  fill: #e1306c;
+  ${space} /* fill: #e1306c; */
 `
 
 const FacebookIcon = styled(Facebook)`
-  ${space}
-  fill: #3b5998;
+  ${space} /* fill: #3b5998; */
 `
 
 const TwitterIcon = styled(Twitter)`
-  ${space}
-  fill: #0084b4;
+  ${space} /* fill: #0084b4; */
 `
 
 const LocationIcon = styled(MapLocation)`
@@ -37,14 +34,13 @@ const AddIcon = styled(AddCircle)`
 const Social = () => (
   <Grommet>
     <Flex
-      flexDirection="column"
+      // flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      pl={2}
     >
-      <TwitterIcon size="medium" mb={[2]} />
-      <FacebookIcon size="medium" mb={[2]} color="darkgrey" />
-      <InstagramIcon size="medium" color="darkgrey" />
+      <TwitterIcon size="small" mr={[2]} color="black" />
+      <FacebookIcon size="small" mr={[2]} color="black" />
+      <InstagramIcon size="small" color="black" />
     </Flex>
   </Grommet>
 )

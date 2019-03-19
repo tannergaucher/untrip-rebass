@@ -10,6 +10,7 @@ module.exports = {
     author: `tannermichaelgaucher@gmail.com`,
   },
   plugins: [
+    `@contentful/gatsby-transformer-contentful-richtext`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,

@@ -24,20 +24,21 @@ const IndexPage = ({ data }) => {
               slug,
               id,
               published,
-              cardImage: { fluid },
+              carouselImages,
               category: { category },
             } = edge.node
 
             return (
-              <Link to={slug} key={id}>
-                <Post
-                  title={title}
-                  intro={introSentence}
-                  category={category}
-                  date={published}
-                  fluid={fluid}
-                />
-              </Link>
+              <Post
+                title={title}
+                intro={introSentence}
+                category={category}
+                date={published}
+                carouselImages={carouselImages}
+                slug={slug}
+                id={id}
+                key={id}
+              />
             )
           })}
         </section>
@@ -84,9 +85,14 @@ export const INDEX_PAGE_QUERY = graphql`
           title
           slug
           introSentence
-          published
+          published(formatString: "MM/DD/YYYY")
           category {
             category
+          }
+          carouselImages {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
           }
           cardImage {
             fluid {

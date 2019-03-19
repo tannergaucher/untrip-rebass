@@ -2,9 +2,11 @@ import React from "react"
 import { Flex, Box, Heading, Text } from "rebass"
 import Img from "gatsby-image"
 
+//  ADD LINK
+
 const SmallPost = ({ title, intro, fluid }) => (
-  <Flex justifyContent="space-between" alignItems="center" width={[1]}>
-    <Box>
+  <Flex justifyContent="space-between" width={[1]} bg="lightgrey">
+    <Box p={[2]}>
       <Heading
         fontSize={[3, 4]}
         letterSpacing="-1.7px"

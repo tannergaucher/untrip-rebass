@@ -1,5 +1,5 @@
 const blue = "dodgerblue"
-const lightgray = "lightgrey"
+const lightgray = "#fafafa"
 const grey = "grey"
 const black = "black"
 const red = "tomato"
@@ -8,8 +8,8 @@ const theme = {
   fontSizes: [14, 16, 18, 24, 32, 44, 62],
   colors: {
     blue,
-    grey,
     lightgray,
+    grey,
     black,
     red,
   },
@@ -19,7 +19,7 @@ const theme = {
       backgroundColor: black,
     },
     outline: {
-      color: "lightgrey",
+      color: "black",
       backgroundColor: "transparent",
       boxShadow: "inset 0 0 2px",
     },
@@ -34,10 +34,5 @@ export const grommetTheme = {
       brand: black,
     },
   },
-  accordion: {
-    border: {
-      side: "left",
-      color: "blue",
-    },
-  },
+  accordion: {},
 }

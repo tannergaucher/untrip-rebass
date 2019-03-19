@@ -1,21 +1,26 @@
 import React from "react"
-import { Box, Heading, Text } from "rebass"
-import Img from "gatsby-image"
+import { Box } from "rebass"
 
+import Image from "../components/styles/Image"
 import Layout from "../components/layout"
 import Container from "../components/styles/Container"
 import Event from "../components/Event"
 import Place from "../components/Place"
+import PostTitle from "../components/styles/PostTitle"
+import Avatar from "../components/Avatar"
+import MainText from "../components/styles/MainText"
 
-const Post = ({ data, pageContext }) => {
-  const { containsPlace, containsEvent } = pageContext
+const Post = ({ data }) => {
   const {
     title,
     published,
-    introSentence,
-    author: { name },
+    author: {
+      name,
+      avatarImage: { fluid: avatarFluid },
+    },
     carouselImages,
     childContentfulPostArticlePreTextNode,
+    childContentfulPostArticleMainTextNode,
     childContentfulPostArticleAfterTextNode,
     events,
     places,
@@ -23,50 +28,74 @@ const Post = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <Container mt={[4]}>
-        <Img fluid={carouselImages[0].fluid} />
-        <Heading mt={[4]}>{title}</Heading>
-        <h6 mt={[4]} fontSize={[1]}>
-          {introSentence}
-        </h6>
-        <h6>{published}</h6>
-        <h6>{name}</h6>
+      <Container my={[4]} width={[1]}>
+        <PostTitle my={[2]}>{title}</PostTitle>
 
-        <Box as="article">
-          <Text
-            as="section"
-            fontSize={[2, 3]}
-            dangerouslySetInnerHTML={{
-              __html: childContentfulPostArticlePreTextNode.html,
-            }}
-          />
+        {/* change to featuredImage */}
 
-          {containsEvent && (
-            <Box as="section">
+        <Image fluid={carouselImages[0].fluid} my={[4]} />
+
+        <Box as="article" bg="#fafafa" px={[4]} py={[2]} my={[4]}>
+          {childContentfulPostArticlePreTextNode && (
+            <MainText
+              as="section"
+              fontSize={[1, 2]}
+              dangerouslySetInnerHTML={{
+                __html:
+                  childContentfulPostArticlePreTextNode.childMarkdownRemark
+                    .html,
+              }}
+            />
+          )}
+
+          {events && (
+            <Box as="section" my={[4]} bg="lightgrey" px={[3]} my={[4]}>
               {events.map(event => (
-                <Event {...event} />
+                <Event {...event} key={event.id} />
               ))}
             </Box>
           )}
 
-          {containsPlace && (
-            <Box as="section">
+          {childContentfulPostArticleMainTextNode && (
+            <MainText
+              as="section"
+              fontSize={[1, 2]}
+              dangerouslySetInnerHTML={{
+                __html:
+                  childContentfulPostArticleMainTextNode.childMarkdownRemark
+                    .html,
+              }}
+            />
+          )}
+
+          {places && (
+            <Box
+              as="section"
+              bg="#fafafa"
+              py={[2]}
+              px={[3]}
+              style={{ borderRadius: "4px" }}
+            >
               {places.map(place => (
-                <Place {...place} />
+                <Place {...place} key={place.id} />
               ))}
             </Box>
           )}
 
-          <Text
-            as="section"
-            fontSize={[2, 3]}
-            dangerouslySetInnerHTML={{
-              __html:
-                childContentfulPostArticleAfterTextNode.childMarkdownRemark
-                  .html,
-            }}
-          />
+          {childContentfulPostArticleAfterTextNode && (
+            <MainText
+              as="section"
+              fontSize={[1, 2]}
+              dangerouslySetInnerHTML={{
+                __html:
+                  childContentfulPostArticleAfterTextNode.childMarkdownRemark
+                    .html,
+              }}
+            />
+          )}
         </Box>
+
+        <Avatar name={name} published={published} fluid={avatarFluid} />
       </Container>
     </Layout>
   )
@@ -78,8 +107,7 @@ export const postPageQuery = graphql`
   query($slug: String!, $containsEvent: Boolean!, $containsPlace: Boolean!) {
     post: contentfulPost(slug: { eq: $slug }) {
       title
-      published
-      introSentence
+      published(formatString: "MM/DD/YYYY")
       author {
         name
         avatarImage {
@@ -98,12 +126,18 @@ export const postPageQuery = graphql`
           html
         }
       }
+      childContentfulPostArticleMainTextNode {
+        childMarkdownRemark {
+          html
+        }
+      }
       childContentfulPostArticleAfterTextNode {
         childMarkdownRemark {
           html
         }
       }
       events @include(if: $containsEvent) {
+        id
         name
         description
         website
@@ -121,18 +155,42 @@ export const postPageQuery = graphql`
         }
         carouselImages {
           fluid {
-            sizes
+            ...GatsbyContentfulFluid
           }
         }
       }
       places @include(if: $containsPlace) {
+        id
         name
-        website
         description
+        openingHours
+        dateTimeCaveats
+        website
         facebook
         instagram
-        openingHours
         closingHours
+        address {
+          lat
+          lon
+        }
+        type {
+          placeType
+        }
+        carouselImages {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+        location {
+          country
+          city
+          neighborhood
+        }
+        placeArticleText {
+          childContentfulRichText {
+            html
+          }
+        }
       }
     }
   }

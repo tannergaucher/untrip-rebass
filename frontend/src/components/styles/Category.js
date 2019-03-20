@@ -3,7 +3,6 @@ import { Heading } from "rebass"
 
 const Category = props => (
   <Heading
-    mx={[4]}
     my={[3]}
     fontSize={[5]}
     letterSpacing=".5px"

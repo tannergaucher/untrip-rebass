@@ -20,12 +20,12 @@ const Place = props => {
     id,
     name,
     description,
-    openingHours,
-    dateTimeCaveats,
-    website,
-    facebook,
-    instagram,
-    closingHours,
+    // openingHours,
+    // dateTimeCaveats,
+    // website,
+    // facebook,
+    // instagram,
+    // closingHours,
     // address: { lat, lon },
     type: { placeType },
     carouselImages,
@@ -44,10 +44,16 @@ const Place = props => {
       boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
     >
       <StickyHeading>{name}</StickyHeading>
+
       <Grommet>
         <Carousel>
           {carouselImages.map(image => (
-            <Image fluid={image.fluid} style={{ height: "225px" }} my={[2]} />
+            <Image
+              fluid={image.fluid}
+              style={{ height: "225px" }}
+              my={[2]}
+              key={id}
+            />
           ))}
         </Carousel>
       </Grommet>

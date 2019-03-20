@@ -13,7 +13,7 @@ const Header = ({ title }) => (
     style={{ position: "sticky", top: 0, zIndex: 1, opacity: ".97" }}
   >
     <Link to="/">
-      <Brand mt={[0]} fontSize={[1, 2, 3]} pl={[3]} style={{ display: "none" }}>
+      <Brand mt={[0]} fontSize={[1, 2, 3]} pl={[3]}>
         {title}
       </Brand>
     </Link>

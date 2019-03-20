@@ -12,6 +12,7 @@ import MainText from "../components/styles/MainText"
 
 const Post = ({ data }) => {
   const {
+    id,
     title,
     published,
     author: {
@@ -103,6 +104,7 @@ export default Post
 export const postPageQuery = graphql`
   query($slug: String!, $containsEvent: Boolean!, $containsPlace: Boolean!) {
     post: contentfulPost(slug: { eq: $slug }) {
+      id
       title
       published(formatString: "MM/DD/YYYY")
       author {

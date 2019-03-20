@@ -3,12 +3,14 @@ import { Text, Button, Heading } from "rebass"
 import { Grommet, Carousel } from "grommet"
 import Image from "../components/styles/Image"
 import SecondaryText from "../components/styles/SecondaryText"
+import AddEvent from "../containers/AddEvent"
 
 // prettier-ignore
 const Detail = props => <Heading fontSize={[1]} fontWeight="200"  {...props}/>
 
 const Event = props => {
   const {
+    postId,
     name,
     description,
     website,
@@ -32,15 +34,14 @@ const Event = props => {
       <Grommet>
         <Carousel>
           {carouselImages.map(image => (
-            <Image fluid={image.fluid} />
+            <Image fluid={image.fluid} style={{ height: "225px" }} />
           ))}
         </Carousel>
       </Grommet>
 
       <h4>{description}</h4>
-      <Button bg="black" color="white">
-        Go
-      </Button>
+
+      <AddEvent postId={postId} />
 
       <Detail>
         <a href={website}>Website</a>

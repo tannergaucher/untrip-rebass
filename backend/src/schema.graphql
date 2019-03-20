@@ -13,8 +13,8 @@ type Mutation {
   signup(email: String!, password: String!, name: String): AuthPayload!
   signin(email: String!, password: String!): AuthPayload!
   signout: SuccessMessage
-  addEvent(postId: Int!): Event
-  removeEvent(postId: Int!): Event
+  addEvent(postId: String!): Event
+  removeEvent(postId: String!): Event
 }
 
 type AuthPayload {
@@ -23,7 +23,7 @@ type AuthPayload {
 }
 
 type Event {
-  postId: Int!
+  postId: String!
   users: [User!]
 }
 

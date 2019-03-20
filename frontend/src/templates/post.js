@@ -50,7 +50,7 @@ const Post = ({ data }) => {
           {events && (
             <Box as="section" my={[4]} bg="lightgrey">
               {events.map(event => (
-                <Event {...event} key={event.id} />
+                <Event {...event} key={event.id} postId={id} />
               ))}
             </Box>
           )}

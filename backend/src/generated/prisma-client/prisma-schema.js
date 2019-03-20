@@ -17,7 +17,7 @@ type BatchPayload {
 
 type Event {
   id: ID!
-  postId: Int!
+  postId: String!
   user: User!
 }
 
@@ -28,7 +28,7 @@ type EventConnection {
 }
 
 input EventCreateInput {
-  postId: Int!
+  postId: String!
   user: UserCreateOneWithoutEventsInput!
 }
 
@@ -38,7 +38,7 @@ input EventCreateManyWithoutUserInput {
 }
 
 input EventCreateWithoutUserInput {
-  postId: Int!
+  postId: String!
 }
 
 type EventEdge {
@@ -59,7 +59,7 @@ enum EventOrderByInput {
 
 type EventPreviousValues {
   id: ID!
-  postId: Int!
+  postId: String!
 }
 
 input EventScalarWhereInput {
@@ -77,14 +77,20 @@ input EventScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  postId: Int
-  postId_not: Int
-  postId_in: [Int!]
-  postId_not_in: [Int!]
-  postId_lt: Int
-  postId_lte: Int
-  postId_gt: Int
-  postId_gte: Int
+  postId: String
+  postId_not: String
+  postId_in: [String!]
+  postId_not_in: [String!]
+  postId_lt: String
+  postId_lte: String
+  postId_gt: String
+  postId_gte: String
+  postId_contains: String
+  postId_not_contains: String
+  postId_starts_with: String
+  postId_not_starts_with: String
+  postId_ends_with: String
+  postId_not_ends_with: String
   AND: [EventScalarWhereInput!]
   OR: [EventScalarWhereInput!]
   NOT: [EventScalarWhereInput!]
@@ -109,16 +115,16 @@ input EventSubscriptionWhereInput {
 }
 
 input EventUpdateInput {
-  postId: Int
+  postId: String
   user: UserUpdateOneRequiredWithoutEventsInput
 }
 
 input EventUpdateManyDataInput {
-  postId: Int
+  postId: String
 }
 
 input EventUpdateManyMutationInput {
-  postId: Int
+  postId: String
 }
 
 input EventUpdateManyWithoutUserInput {
@@ -139,7 +145,7 @@ input EventUpdateManyWithWhereNestedInput {
 }
 
 input EventUpdateWithoutUserDataInput {
-  postId: Int
+  postId: String
 }
 
 input EventUpdateWithWhereUniqueWithoutUserInput {
@@ -168,14 +174,20 @@ input EventWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  postId: Int
-  postId_not: Int
-  postId_in: [Int!]
-  postId_not_in: [Int!]
-  postId_lt: Int
-  postId_lte: Int
-  postId_gt: Int
-  postId_gte: Int
+  postId: String
+  postId_not: String
+  postId_in: [String!]
+  postId_not_in: [String!]
+  postId_lt: String
+  postId_lte: String
+  postId_gt: String
+  postId_gte: String
+  postId_contains: String
+  postId_not_contains: String
+  postId_starts_with: String
+  postId_not_starts_with: String
+  postId_ends_with: String
+  postId_not_ends_with: String
   user: UserWhereInput
   AND: [EventWhereInput!]
   OR: [EventWhereInput!]

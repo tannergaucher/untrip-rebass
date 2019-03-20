@@ -3,6 +3,7 @@ import { Accordion, AccordionPanel, Grommet } from "grommet"
 import { Menu as MenuIcon, Close } from "grommet-icons"
 import { Heading } from "rebass"
 import { graphql, StaticQuery } from "gatsby"
+import { kebabCase } from "lodash"
 
 import MenuList from "./styles/MenuList"
 import MenuButton from "./styles/MenuButton"
@@ -10,8 +11,8 @@ import CloseButton from "./styles/CloseButton"
 import Category from "./styles/Category"
 import Link from "../components/styles/Link"
 import Layer from "../components/styles/Layer"
+import Divider from "../components/styles/Divider"
 import { grommetTheme } from "../utils/theme"
-import { kebabCase } from "lodash"
 
 const MenuItem = props => (
   <Heading {...props} fontSize={[3]} fontWeight="500" my={[2]} color="black" />
@@ -85,10 +86,11 @@ function Menu() {
                         </AccordionPanel>
                       )
                     })}
-                    <Category>Culture</Category>
-                    <Category>Newsletter</Category>
-                    <Category>Get App</Category>
-                    <Category>About Us</Category>
+                    <Divider />
+                    <Category>
+                      <Link to="/profile">Profile</Link>
+                    </Category>
+                    <Category>Sign in / out</Category>
                   </Accordion>
                 </MenuList>
               </Layer>

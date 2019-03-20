@@ -15,7 +15,6 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             title
-            subTitle
           }
         }
       }
@@ -24,14 +23,10 @@ const Layout = ({ children }) => (
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyles />
-          <Header
-            title={data.site.siteMetadata.title}
-            subTitle={data.site.siteMetadata.subTitle}
-          />
-          <Flex as="main" flexDirection="column" alignItems="center">
+          <Header title={data.site.siteMetadata.title} />
+          <Flex as="main" flexDirection="column" alignItems="center" p={[3]}>
             {children}
           </Flex>
-          {/* <Footer /> */}
         </>
       </ThemeProvider>
     )}

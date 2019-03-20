@@ -31,11 +31,9 @@ const Post = ({ data }) => {
       <Container my={[4]} width={[1]}>
         <PostTitle my={[2]}>{title}</PostTitle>
 
-        {/* change to featuredImage */}
-
         <Image fluid={carouselImages[0].fluid} my={[4]} />
 
-        <Box as="article" bg="#fafafa" px={[4]} py={[2]} my={[4]}>
+        <Box as="article" bg="#fafafa">
           {childContentfulPostArticlePreTextNode && (
             <MainText
               as="section"
@@ -49,7 +47,7 @@ const Post = ({ data }) => {
           )}
 
           {events && (
-            <Box as="section" my={[4]} bg="lightgrey" px={[3]} my={[4]}>
+            <Box as="section" my={[4]} bg="lightgrey">
               {events.map(event => (
                 <Event {...event} key={event.id} />
               ))}
@@ -73,7 +71,6 @@ const Post = ({ data }) => {
               as="section"
               bg="#fafafa"
               py={[2]}
-              px={[3]}
               style={{ borderRadius: "4px" }}
             >
               {places.map(place => (

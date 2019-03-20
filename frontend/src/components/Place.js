@@ -4,6 +4,16 @@ import { Carousel, Grommet } from "grommet"
 import Image from "../components/styles/Image"
 import SecondaryText from "../components/styles/SecondaryText"
 
+const StickyHeading = props => (
+  <Heading
+    fontSize={[3]}
+    pt={[2]}
+    textAlign="center"
+    {...props}
+    style={{ position: "sticky", top: 0, zIndex: 7 }}
+  />
+)
+
 const Place = props => {
   const {
     id,
@@ -26,15 +36,13 @@ const Place = props => {
 
   return (
     <Card
-      mx={[4]}
       my={[4]}
       bg="white"
-      p={[4]}
+      p={[3]}
       borderRadius="4px"
       boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
-      style={{ position: "sticky", top: 0, zIndex: 6 }}
     >
-      <Heading>{name}</Heading>
+      <StickyHeading>{name}</StickyHeading>
 
       <Grommet>
         <Carousel>

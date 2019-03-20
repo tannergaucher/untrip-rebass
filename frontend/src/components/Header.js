@@ -8,35 +8,15 @@ import Link from "../components/styles/Link"
 const Header = ({ title, subTitle }) => (
   <Flex
     justifyContent="space-between"
-    p={1}
+    alignItems="center"
     bg="white"
-    style={{ position: "sticky", top: 0, zIndex: 1, opacity: ".97", zIndex: 5 }}
+    style={{ position: "sticky", top: 0, zIndex: 1, opacity: ".97" }}
   >
     <Link to="/">
-      <Brand mt={[0]} fontSize={[1, 2, 3]}>
+      <Brand mt={[0]} fontSize={[1, 2, 3]} pl={[3]} style={{ display: "none" }}>
         {title}
       </Brand>
     </Link>
-
-    {/* <Flex>
-      <Link to="/food-&-drink">
-        <Brand mt={[0]} fontSize={[1, 2, 3]}>
-          Food & Drink
-        </Brand>
-      </Link>
-
-      <Link to="/music">
-        <Brand mt={[0]} fontSize={[1, 2, 3]}>
-          Music
-        </Brand>
-      </Link>
-
-      <Link to="/culture">
-        <Brand mt={[0]} fontSize={[1, 2, 3]}>
-          Culture
-        </Brand>
-      </Link>
-    </Flex> */}
 
     <Menu />
   </Flex>

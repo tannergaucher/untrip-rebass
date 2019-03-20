@@ -1,11 +1,11 @@
 import React from "react"
-import { Flex, Box } from "rebass"
+import { Flex } from "rebass"
 
 import Menu from "./Menu"
 import Brand from "./styles/Brand"
 import Link from "../components/styles/Link"
 
-const Header = ({ title, subTitle }) => (
+const Header = ({ title }) => (
   <Flex
     justifyContent="space-between"
     alignItems="center"
@@ -17,7 +17,6 @@ const Header = ({ title, subTitle }) => (
         {title}
       </Brand>
     </Link>
-
     <Menu />
   </Flex>
 )

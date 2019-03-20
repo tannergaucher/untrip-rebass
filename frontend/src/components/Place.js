@@ -3,6 +3,7 @@ import { Text, Button, Box, Heading, Card } from "rebass"
 import { Carousel, Grommet } from "grommet"
 import Image from "../components/styles/Image"
 import SecondaryText from "../components/styles/SecondaryText"
+import AddToListModal from "../components/AddToListModal"
 
 const StickyHeading = props => (
   <Heading
@@ -43,7 +44,6 @@ const Place = props => {
       boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
     >
       <StickyHeading>{name}</StickyHeading>
-
       <Grommet>
         <Carousel>
           {carouselImages.map(image => (
@@ -55,9 +55,7 @@ const Place = props => {
       <Text my={[2]}>
         <em>{description}</em>
       </Text>
-      <Button bg="black" my={[2]}>
-        Add to list
-      </Button>
+      <AddToListModal />
       <SecondaryText dangerouslySetInnerHTML={{ __html: html }} />
     </Card>
   )

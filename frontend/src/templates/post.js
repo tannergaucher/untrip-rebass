@@ -33,7 +33,7 @@ const Post = ({ data }) => {
 
         <Image fluid={carouselImages[0].fluid} my={[4]} />
 
-        <Box as="article" bg="#fafafa">
+        <Box as="article" bg="#fafafa" p={[0, 2]}>
           {childContentfulPostArticlePreTextNode && (
             <MainText
               as="section"

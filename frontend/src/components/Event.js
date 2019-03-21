@@ -1,12 +1,7 @@
 import React from "react"
-import { Text, Button, Heading } from "rebass"
-import { Grommet, Carousel } from "grommet"
+import { Carousel, Heading, Paragraph } from "grommet"
 import Image from "../components/styles/Image"
-import SecondaryText from "../components/styles/SecondaryText"
 import AddEvent from "../containers/AddEvent"
-
-// prettier-ignore
-const Detail = props => <Heading fontSize={[1]} fontWeight="200"  {...props}/>
 
 const Event = props => {
   const {
@@ -29,34 +24,30 @@ const Event = props => {
 
   return (
     <>
-      <h1>{name}</h1>
+      <Heading level="1">{name}</Heading>
 
-      <Grommet>
-        <Carousel>
-          {carouselImages.map(image => (
-            <Image fluid={image.fluid} style={{ height: "225px" }} />
-          ))}
-        </Carousel>
-      </Grommet>
-
-      <h4>{description}</h4>
-
+      <Carousel>
+        {carouselImages.map(image => (
+          <Image fluid={image.fluid} style={{ height: "225px" }} />
+        ))}
+      </Carousel>
+      <Heading level="3">{description}</Heading>
       <AddEvent postId={postId} />
 
-      <Detail>
+      <Heading level="6">
         <a href={website}>Website</a>
-      </Detail>
-      <Detail>
+      </Heading>
+      <Heading level="6">
         <a href={instagram}>Instagram</a>
-      </Detail>
-      <Detail>
+      </Heading>
+      <Heading level="6">
         <a href={facebook}>Facebook</a>
-      </Detail>
-      <Detail>{price}</Detail>
-      <Detail>
+      </Heading>
+      <Heading level="6">{price}</Heading>
+      <Heading level="6">
         {eventStarts} to {eventEnds}
-      </Detail>
-      <SecondaryText dangerouslySetInnerHTML={{ __html: html }} my={[4]} />
+      </Heading>
+      <Paragraph dangerouslySetInnerHTML={{ __html: html }} />
     </>
   )
 }

@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import User from "../containers/User"
 import PleaseSignin from "../containers/PleaseSignin"
-import Post from "../components/Post"
+import Card from "../components/Card"
 import Container from "../components/styles/Container"
 
 const going = ({ data }) => {
@@ -41,7 +41,7 @@ const going = ({ data }) => {
                   } = event[0].node
 
                   return (
-                    <Post
+                    <Card
                       title={title}
                       intro={introSentence}
                       category={category}

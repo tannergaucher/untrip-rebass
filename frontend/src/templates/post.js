@@ -1,6 +1,5 @@
 import React from "react"
-import { Box } from "rebass"
-import { Heading, Text } from "grommet"
+import { Heading, Text, Box } from "grommet"
 
 import Image from "../components/styles/Image"
 import Layout from "../components/layout"
@@ -31,9 +30,9 @@ const Post = ({ data }) => {
       <Container my={[4]} width={[1]}>
         <Heading>{title}</Heading>
 
-        <Image fluid={carouselImages[0].fluid} my={[4]} />
+        <Image fluid={carouselImages[0].fluid} />
 
-        <Box as="article" bg="#fafafa" p={[0, 2]}>
+        <Box as="article">
           {childContentfulPostArticlePreTextNode && (
             <Text
               dangerouslySetInnerHTML={{
@@ -45,7 +44,7 @@ const Post = ({ data }) => {
           )}
 
           {events && (
-            <Box as="section" my={[4]} bg="lightgrey">
+            <Box as="section">
               {events.map(event => (
                 <Event {...event} key={event.id} postId={id} />
               ))}
@@ -63,12 +62,7 @@ const Post = ({ data }) => {
           )}
 
           {places && (
-            <Box
-              as="section"
-              bg="#fafafa"
-              py={[2]}
-              style={{ borderRadius: "4px" }}
-            >
+            <Box as="section">
               {places.map(place => (
                 <Place {...place} key={place.id} />
               ))}
@@ -78,7 +72,6 @@ const Post = ({ data }) => {
           {childContentfulPostArticleAfterTextNode && (
             <Text
               as="section"
-              fontSize={[1, 2]}
               dangerouslySetInnerHTML={{
                 __html:
                   childContentfulPostArticleAfterTextNode.childMarkdownRemark

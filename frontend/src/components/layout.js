@@ -1,9 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Grommet } from "grommet"
+import { Box, Grommet } from "grommet"
 import { StaticQuery, graphql } from "gatsby"
-import { Flex } from "rebass"
-
 import Header from "./Header"
 import GlobalStyles from "../utils/GlobalStyles"
 
@@ -32,9 +30,9 @@ const Layout = ({ children }) => (
         <>
           <GlobalStyles />
           <Header title={data.site.siteMetadata.title} />
-          <Flex as="main" flexDirection="column" alignItems="center" p={[3]}>
+          <Box pad="small" align="center" as="main">
             {children}
-          </Flex>
+          </Box>
         </>
       </Grommet>
     )}

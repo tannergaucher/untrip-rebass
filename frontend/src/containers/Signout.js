@@ -1,7 +1,7 @@
 import React from "react"
 import { Mutation } from "react-apollo"
 import gql from "graphql-tag"
-import { Button } from "rebass"
+import { Button } from "grommet"
 
 import { CURRENT_USER_QUERY } from "../containers/User"
 
@@ -23,11 +23,7 @@ const Signout = () => {
       // }}
     >
       {signout => {
-        return (
-          <Button onClick={signout} bg="black">
-            SIGN OUT
-          </Button>
-        )
+        return <Button onClick={signout} label="Sign Out" />
       }}
     </Mutation>
   )

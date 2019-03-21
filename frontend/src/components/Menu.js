@@ -1,12 +1,9 @@
 import React, { useState } from "react"
-import { Accordion, AccordionPanel, Heading, Layer } from "grommet"
+import { Accordion, AccordionPanel, Heading, Layer, Box, Button } from "grommet"
 import { Menu as MenuIcon, Close } from "grommet-icons"
 import { graphql, StaticQuery } from "gatsby"
 import { kebabCase } from "lodash"
 
-import MenuList from "./styles/MenuList"
-import MenuButton from "./styles/MenuButton"
-import CloseButton from "./styles/CloseButton"
 import Link from "../components/styles/Link"
 import Divider from "../components/styles/Divider"
 
@@ -44,9 +41,7 @@ function Menu() {
 
         return (
           <>
-            <MenuButton onClick={handleOpen}>
-              <MenuIcon size="medium" />
-            </MenuButton>
+            <Button onClick={handleOpen} icon={<MenuIcon />} />
             {open && (
               <Layer
                 onClickOutside={handleClose}
@@ -58,10 +53,9 @@ function Menu() {
                 responsive={true}
                 style={{ borderRadius: "0" }}
               >
-                <CloseButton onClick={handleClose}>
-                  <Close color="black" size="medium" />
-                </CloseButton>
-                <MenuList p={[3]}>
+                <Button onClick={handleClose} icon={<Close />} />
+
+                <Box>
                   <Accordion>
                     {edges.map(edge => {
                       const { category, post_ } = edge.node
@@ -75,6 +69,9 @@ function Menu() {
                           }
                           key={category}
                         >
+                          <Heading level="4" margin="small">
+                            <Link to={kebabCase(category)}>ALL</Link>
+                          </Heading>
                           {post_.map(post => {
                             const { subcategory, id } = post
                             return subcategory.map(node => (
@@ -107,7 +104,7 @@ function Menu() {
                       <Link to="/signin"> Sign In </Link>
                     </Heading>
                   </Accordion>
-                </MenuList>
+                </Box>
               </Layer>
             )}
           </>

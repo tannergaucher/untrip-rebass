@@ -1,18 +1,7 @@
 import React from "react"
-import { Card } from "rebass"
 import { Carousel, Text, Heading, Box } from "grommet"
 import Image from "../components/styles/Image"
 import AddToListModal from "../components/AddToListModal"
-
-const StickyHeading = props => (
-  <Heading
-    fontSize={[3]}
-    pt={[2]}
-    textAlign="center"
-    {...props}
-    style={{ position: "sticky", top: 0, zIndex: 7 }}
-  />
-)
 
 const Place = props => {
   const {
@@ -35,26 +24,46 @@ const Place = props => {
   } = props
 
   return (
-    <Card
-      borderRadius="4px"
-      boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
-      my={[4, 5, 6]}
-    >
-      <Heading level="2">{name}</Heading>
+    <Box elevation="medium" round="medium" margin={{ vertical: "large" }}>
+      <Heading
+        level="2"
+        textAlign="center"
+        margin="medium"
+        style={{ position: "sticky", top: 0, zIndex: 3 }}
+      >
+        {name}
+      </Heading>
       <Carousel>
         {carouselImages.map(image => (
           <Image fluid={image.fluid} style={{ height: "225px" }} key={id} />
         ))}
       </Carousel>
 
-      <Box margin="small">
-        <Text>
+      <Box margin="medium">
+        <Heading level="5">
           <em>{description}</em>
-        </Text>
+        </Heading>
+        {/* 
+        TODO 
+
+          <Info
+            close={}
+            caveats={}
+            website={}
+            facebook={}
+            instagram={}
+            address={}
+            open={}
+          /> 
+
+           */}
         <AddToListModal name={name} />
-        <Text dangerouslySetInnerHTML={{ __html: html }} />
+        <Text
+          dangerouslySetInnerHTML={{ __html: html }}
+          margin={{ top: "small" }}
+        />
       </Box>
-    </Card>
+    </Box>
   )
 }
 

@@ -1,21 +1,32 @@
 import React from "react"
-import { Card, Heading } from "rebass"
+import { Box, Heading } from "grommet"
 import { kebabCase } from "lodash"
 
 import Image from "../components/styles/Image"
 import Link from "../components/styles/Link"
 
 const Subcategory = ({ category, subcategory, fluid }) => (
-  <Card style={{ position: "relative" }} my={[4]}>
+  <Box
+    margin={{ vertical: "large" }}
+    style={{ position: "relative", borderRadius: "50px" }}
+    elevation="large"
+  >
     <Link to={`/${kebabCase(category)}/${kebabCase(subcategory)}`}>
       <Heading
-        style={{ position: "absolute", top: "50%", right: "50%", zIndex: 1 }}
+        level="1"
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: "50%",
+          zIndex: 1,
+          background: "white",
+        }}
       >
         {subcategory}
       </Heading>
-      <Image fluid={fluid} />
+      <Image fluid={fluid} style={{ borderRadius: "50px" }} />
     </Link>
-  </Card>
+  </Box>
 )
 
 export default Subcategory

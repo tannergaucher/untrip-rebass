@@ -1,16 +1,15 @@
 import React from "react"
+import { Box, Heading } from "grommet"
 
 import Layout from "../components/layout"
 import Container from "../components/styles/Container"
-import Post from "../components/Post"
-import Section from "../components/Section"
-import SmallPost from "../components/SmallPost"
+import Card from "../components/Card"
+import SmallCard from "../components/SmallCard"
 import Link from "../components/styles/Link"
 
 const IndexPage = ({ data }) => {
   const { edges: latest } = data.latest
   const { edges: featured } = data.featured
-
   return (
     <Layout>
       <Container width={[1]}>
@@ -23,15 +22,17 @@ const IndexPage = ({ data }) => {
               id,
               published,
               carouselImages,
+              postPlace: { neighborhood },
               category: { category },
             } = edge.node
 
             return (
-              <Post
+              <Card
                 title={title}
                 intro={introSentence}
                 category={category}
                 date={published}
+                neighborhood={neighborhood}
                 carouselImages={carouselImages}
                 slug={slug}
                 id={id}
@@ -52,15 +53,16 @@ const IndexPage = ({ data }) => {
             } = edge.node.post_[0]
 
             return (
-              <Section title={category} key={id}>
+              <Box key={id}>
+                <Heading level="4">{category}</Heading>
                 <Link to={slug}>
-                  <SmallPost
+                  <SmallCard
                     title={title}
                     intro={introSentence}
                     fluid={fluid}
                   />
                 </Link>
-              </Section>
+              </Box>
             )
           })}
         </div>
@@ -80,6 +82,9 @@ export const INDEX_PAGE_QUERY = graphql`
           title
           slug
           introSentence
+          postPlace {
+            neighborhood
+          }
           published(formatString: "MM/DD/YYYY")
           category {
             category

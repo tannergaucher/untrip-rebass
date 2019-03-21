@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import { ApolloConsumer } from "react-apollo"
-import { Heading } from "rebass"
+import { Heading } from "grommet"
 
 import Signout from "../containers/Signout"
 import PleaseSignin from "../containers/PleaseSignin"
@@ -17,10 +17,8 @@ const profile = () => (
 
           return (
             <>
-              <Heading fontSize={[4, 5]}>{name}</Heading>
-              <Heading m={5} fontSize={[2, 3]} fontWeight="lighter">
-                {email}
-              </Heading>
+              <Heading level="1"> Hey, {name} 👋</Heading>
+              <Heading level="5">{email}</Heading>
               <Signout />
             </>
           )

@@ -1,16 +1,17 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Heading } from "grommet"
 
 import Container from "../components/styles/Container"
 import Layout from "../components/layout"
-import SmallPost from "../components/SmallPost"
+import SmallCard from "../components/SmallCard"
 
 const subcategoryPage = ({ data }) => {
   const { subcategory, post_ } = data.contentfulSubcategory
   return (
     <Layout>
       <Container width={1}>
-        <h2>{subcategory}</h2>
+        <Heading level="3">{subcategory}</Heading>
 
         {post_.map(post => {
           const {
@@ -19,7 +20,7 @@ const subcategoryPage = ({ data }) => {
             cardImage: { fluid },
           } = post
 
-          return <SmallPost title={title} intro={introSentence} fluid={fluid} />
+          return <SmallCard title={title} intro={introSentence} fluid={fluid} />
         })}
       </Container>
     </Layout>

@@ -1,8 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import { Grommet, Carousel } from "grommet"
-import { Button } from "rebass"
+import { Carousel, Button } from "grommet"
 
 import Layout from "../components/layout"
 import Map from "../components/Map"
@@ -29,17 +28,17 @@ const placePage = ({ data }) => {
   return (
     <Layout>
       <Container width={[1]}>
-        <Grommet>
-          <Carousel>
-            {carouselImages.map(image => (
-              <Img fluid={image.fluid} style={{ height: "225px" }} />
-            ))}
-          </Carousel>
-        </Grommet>
+        <Carousel>
+          {carouselImages.map(image => (
+            <Img fluid={image.fluid} style={{ height: "225px" }} />
+          ))}
+        </Carousel>
 
         <h1>{name}</h1>
         <p>{description}</p>
-        <Button bg="black">+ Add to list</Button>
+
+        <Button label="Add To / Added to `list`" primary />
+
         <p>{website}</p>
         <p>{facebook}</p>
         <p>{instagram}</p>

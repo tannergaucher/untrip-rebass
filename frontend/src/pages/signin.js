@@ -1,5 +1,4 @@
 import React from "react"
-import { Tabs, Tab, Grommet } from "grommet"
 
 import Layout from "../components/layout"
 import Container from "../components/styles/Container"

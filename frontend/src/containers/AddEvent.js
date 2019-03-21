@@ -2,8 +2,7 @@ import React from "react"
 import { Mutation } from "react-apollo"
 import gql from "graphql-tag"
 import { CURRENT_USER_QUERY } from "../containers/User"
-import { Button } from "rebass"
-
+import { Button } from "grommet"
 const ADD_EVENT_MUTATION = gql`
   mutation ADD_EVENT_MUTATION($postId: String!) {
     addEvent(postId: $postId) {
@@ -32,7 +31,7 @@ const AddEvent = ({ postId }) => (
       },
     }}
   >
-    {addEvent => <Button onClick={addEvent}>GO</Button>}
+    {addEvent => <Button label="GO" onClick={addEvent} />}
   </Mutation>
 )
 

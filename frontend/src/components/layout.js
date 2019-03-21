@@ -1,12 +1,20 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { ThemeProvider } from "styled-components"
+import { Grommet } from "grommet"
 import { StaticQuery, graphql } from "gatsby"
 import { Flex } from "rebass"
 
 import Header from "./Header"
-import theme from "../utils/theme"
 import GlobalStyles from "../utils/GlobalStyles"
+
+const theme = {
+  global: {
+    colors: {
+      brand: "black",
+    },
+  },
+  accordion: {},
+}
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -20,7 +28,7 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <ThemeProvider theme={theme}>
+      <Grommet theme={theme}>
         <>
           <GlobalStyles />
           <Header title={data.site.siteMetadata.title} />
@@ -28,7 +36,7 @@ const Layout = ({ children }) => (
             {children}
           </Flex>
         </>
-      </ThemeProvider>
+      </Grommet>
     )}
   />
 )

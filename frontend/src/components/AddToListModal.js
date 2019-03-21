@@ -1,43 +1,41 @@
 import React, { useState } from "react"
-import { Flex, Box, Button, Heading, Text } from "rebass"
-import { Grommet, Layer, Select } from "grommet"
+import { Layer, Heading, Select, Form, FormField, Button, Box } from "grommet"
 
-function CenterModal() {
+function CenterModal({ name }) {
   const [show, setShow] = useState()
   return (
-    <Grommet>
-      <Button bg="black" color="white" mt={[2]} onClick={() => setShow(true)}>
-        Add to List
-      </Button>
+    <>
+      <Button label="Add To List" primary onClick={() => setShow(true)} />
       {show && (
         <Layer
-          responsive={false}
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
+          responsive={true}
         >
-          <SelectList />
+          <SelectList name={name} />
         </Layer>
       )}
-    </Grommet>
+    </>
   )
 }
 
-function SelectList() {
-  const [list, setList] = useState("cafes")
+function SelectList({ name }) {
+  const [list, setList] = useState("")
 
   return (
-    <Box p={2}>
-      <Heading>Add to</Heading>
+    <Box margin="medium">
+      <Heading level="4">{`Add ${name} to your lists`}</Heading>
       <Select
-        options={["cafes", "breakfast spots"]}
+        options={["Work Cafes", "Breakfast Spots"]}
         value={list}
         onChange={({ option }) => setList(option)}
       />
-      <Heading>Create new list</Heading>
-      <Flex mt={[2]}>
-        <input />
-        <Button bg="black">+</Button>
-      </Flex>
+      <Heading level="4">Or start a new one</Heading>
+
+      <Form>
+        <FormField name="" />
+        <Button type="submit" label="+ Create" />
+      </Form>
     </Box>
   )
 }

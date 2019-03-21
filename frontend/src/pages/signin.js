@@ -1,15 +1,14 @@
 import React from "react"
+import { Tabs, Tab, Grommet } from "grommet"
 
 import Layout from "../components/layout"
 import Container from "../components/styles/Container"
-import Link from "../components/styles/Link"
-import Signin from "../containers/Signin"
+import Auth from "../components/Auth"
 
 const signin = () => (
   <Layout>
     <Container>
-      <Link to="/signup">Sign up</Link>
-      <Signin />
+      <Auth />
     </Container>
   </Layout>
 )

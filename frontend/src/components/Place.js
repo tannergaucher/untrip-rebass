@@ -1,8 +1,7 @@
 import React from "react"
-import { Text, Button, Box, Heading, Card } from "rebass"
-import { Carousel, Grommet } from "grommet"
+import { Card } from "rebass"
+import { Carousel, Text, Heading, Box } from "grommet"
 import Image from "../components/styles/Image"
-import SecondaryText from "../components/styles/SecondaryText"
 import AddToListModal from "../components/AddToListModal"
 
 const StickyHeading = props => (
@@ -37,32 +36,24 @@ const Place = props => {
 
   return (
     <Card
-      my={[4]}
-      bg="white"
-      p={[3]}
       borderRadius="4px"
       boxShadow="0 2px 16px rgba(0, 0, 0, 0.25)"
+      my={[4, 5, 6]}
     >
-      <StickyHeading>{name}</StickyHeading>
+      <Heading level="2">{name}</Heading>
+      <Carousel>
+        {carouselImages.map(image => (
+          <Image fluid={image.fluid} style={{ height: "225px" }} key={id} />
+        ))}
+      </Carousel>
 
-      <Grommet>
-        <Carousel>
-          {carouselImages.map(image => (
-            <Image
-              fluid={image.fluid}
-              style={{ height: "225px" }}
-              my={[2]}
-              key={id}
-            />
-          ))}
-        </Carousel>
-      </Grommet>
-
-      <Text my={[2]}>
-        <em>{description}</em>
-      </Text>
-      <AddToListModal />
-      <SecondaryText dangerouslySetInnerHTML={{ __html: html }} />
+      <Box margin="small">
+        <Text>
+          <em>{description}</em>
+        </Text>
+        <AddToListModal name={name} />
+        <Text dangerouslySetInnerHTML={{ __html: html }} />
+      </Box>
     </Card>
   )
 }

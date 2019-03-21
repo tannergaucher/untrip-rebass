@@ -1,27 +1,20 @@
 import React from "react"
-import { Heading, Flex } from "rebass"
+import { Flex } from "rebass"
+import { Heading, Grommet } from "grommet"
 import { kebabCase } from "lodash"
 
-import Brand from "../components/styles/Brand"
-import Divider from "../components/styles/Divider"
 import Link from "../components/styles/Link"
 
 const Section = ({ title, children }) => (
-  <Flex flexDirection="column">
-    <Brand mt={[6]} fontSize={[3, 4]} style={{ textTransform: "uppercase" }}>
-      {title}
-    </Brand>
-    <Divider />
-    {children}
-    <Heading
-      my={[3]}
-      fontSize={[1, 2]}
-      fontWeight="900"
-      style={{ textTransform: "uppercase" }}
-    >
-      <Link to={`/${kebabCase(title)}`}>More {title}</Link>
-    </Heading>
-  </Flex>
+  <Grommet>
+    <Flex flexDirection="column">
+      <Heading level="3">{title}</Heading>
+      {children}
+      <Heading level="5">
+        <Link to={`/${kebabCase(title)}`}>More {title}</Link>
+      </Heading>
+    </Flex>
+  </Grommet>
 )
 
 export default Section

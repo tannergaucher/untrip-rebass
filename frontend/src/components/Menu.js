@@ -1,22 +1,14 @@
 import React, { useState } from "react"
-import { Accordion, AccordionPanel, Grommet } from "grommet"
+import { Accordion, AccordionPanel, Heading, Layer } from "grommet"
 import { Menu as MenuIcon, Close } from "grommet-icons"
-import { Heading } from "rebass"
 import { graphql, StaticQuery } from "gatsby"
 import { kebabCase } from "lodash"
 
 import MenuList from "./styles/MenuList"
 import MenuButton from "./styles/MenuButton"
 import CloseButton from "./styles/CloseButton"
-import Category from "./styles/Category"
 import Link from "../components/styles/Link"
-import Layer from "../components/styles/Layer"
 import Divider from "../components/styles/Divider"
-import { grommetTheme } from "../utils/theme"
-
-const MenuItem = props => (
-  <Heading {...props} fontSize={[3]} fontWeight="500" my={[2]} color="black" />
-)
 
 function Menu() {
   const [open, setOpen] = useState(false)
@@ -51,12 +43,21 @@ function Menu() {
         const { edges } = data.allContentfulCategory
 
         return (
-          <Grommet theme={grommetTheme}>
+          <>
             <MenuButton onClick={handleOpen}>
-              <MenuIcon color="black" size="medium" />
+              <MenuIcon size="medium" />
             </MenuButton>
             {open && (
-              <Layer onClickOutside={handleClose} onEsc={handleClose}>
+              <Layer
+                onClickOutside={handleClose}
+                onEsc={handleClose}
+                modal
+                position="right"
+                animate="true"
+                full="vertical"
+                responsive={true}
+                style={{ borderRadius: "0" }}
+              >
                 <CloseButton onClick={handleClose}>
                   <Close color="black" size="medium" />
                 </CloseButton>
@@ -67,7 +68,11 @@ function Menu() {
 
                       return (
                         <AccordionPanel
-                          label={<Category>{category}</Category>}
+                          label={
+                            <Heading margin="xsmall" level="2">
+                              {category}
+                            </Heading>
+                          }
                           key={category}
                         >
                           {post_.map(post => {
@@ -79,7 +84,9 @@ function Menu() {
                                 )}`}
                                 key={id}
                               >
-                                <MenuItem>{node.subcategory}</MenuItem>
+                                <Heading level="4" margin="small">
+                                  {node.subcategory}
+                                </Heading>
                               </Link>
                             ))
                           })}
@@ -87,15 +94,23 @@ function Menu() {
                       )
                     })}
                     <Divider />
-                    <Category>
+                    <Heading level="2" margin="xsmall">
+                      <Link to="/my-events">Events</Link>
+                    </Heading>
+                    <Heading level="2" margin="xsmall">
+                      <Link to="/my-lists">Lists</Link>
+                    </Heading>
+                    <Heading level="2" margin="xsmall">
                       <Link to="/profile">Profile</Link>
-                    </Category>
-                    <Category>Sign in / out</Category>
+                    </Heading>
+                    <Heading level="2" margin="xsmall">
+                      <Link to="/signin"> Sign In </Link>
+                    </Heading>
                   </Accordion>
                 </MenuList>
               </Layer>
             )}
-          </Grommet>
+          </>
         )
       }}
     />

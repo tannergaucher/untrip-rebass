@@ -5,8 +5,6 @@ import Container from "../components/styles/Container"
 import Post from "../components/Post"
 import Section from "../components/Section"
 import SmallPost from "../components/SmallPost"
-import Newsletter from "../components/Newsletter"
-import Download from "../components/Download"
 import Link from "../components/styles/Link"
 
 const IndexPage = ({ data }) => {
@@ -66,9 +64,6 @@ const IndexPage = ({ data }) => {
             )
           })}
         </div>
-
-        <Download />
-        <Newsletter />
       </Container>
     </Layout>
   )

@@ -1,14 +1,13 @@
 import React from "react"
 import { Box } from "rebass"
+import { Heading, Text } from "grommet"
 
 import Image from "../components/styles/Image"
 import Layout from "../components/layout"
 import Container from "../components/styles/Container"
 import Event from "../components/Event"
 import Place from "../components/Place"
-import PostTitle from "../components/styles/PostTitle"
 import Avatar from "../components/Avatar"
-import MainText from "../components/styles/MainText"
 
 const Post = ({ data }) => {
   const {
@@ -30,15 +29,13 @@ const Post = ({ data }) => {
   return (
     <Layout>
       <Container my={[4]} width={[1]}>
-        <PostTitle my={[2]}>{title}</PostTitle>
+        <Heading>{title}</Heading>
 
         <Image fluid={carouselImages[0].fluid} my={[4]} />
 
         <Box as="article" bg="#fafafa" p={[0, 2]}>
           {childContentfulPostArticlePreTextNode && (
-            <MainText
-              as="section"
-              fontSize={[1, 2]}
+            <Text
               dangerouslySetInnerHTML={{
                 __html:
                   childContentfulPostArticlePreTextNode.childMarkdownRemark
@@ -56,9 +53,7 @@ const Post = ({ data }) => {
           )}
 
           {childContentfulPostArticleMainTextNode && (
-            <MainText
-              as="section"
-              fontSize={[1, 2]}
+            <Text
               dangerouslySetInnerHTML={{
                 __html:
                   childContentfulPostArticleMainTextNode.childMarkdownRemark
@@ -81,7 +76,7 @@ const Post = ({ data }) => {
           )}
 
           {childContentfulPostArticleAfterTextNode && (
-            <MainText
+            <Text
               as="section"
               fontSize={[1, 2]}
               dangerouslySetInnerHTML={{
@@ -93,7 +88,12 @@ const Post = ({ data }) => {
           )}
         </Box>
 
-        <Avatar name={name} published={published} fluid={avatarFluid} />
+        <Avatar
+          name={name}
+          published={published}
+          fluid={avatarFluid}
+          social="http://www.twitter.com/tannergaucher"
+        />
       </Container>
     </Layout>
   )

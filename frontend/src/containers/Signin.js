@@ -2,14 +2,10 @@ import React from "react"
 import { Mutation } from "react-apollo"
 import gql from "graphql-tag"
 import { navigate } from "@reach/router"
-import { Button } from "rebass"
-
+import { Button, Form, FormField, Grommet } from "grommet"
 import Error from "../components/Error"
-import Fieldset from "../components/styles/Fieldset"
-import Input from "../components/styles/Input"
-import Brand from "../components/styles/Brand"
-
 import { CURRENT_USER_QUERY } from "./User"
+import Fieldset from "../components/styles/Fieldset"
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -46,18 +42,17 @@ class Signin extends React.Component {
       >
         {(signin, { loading, error }) => {
           return (
-            <>
-              <form
+            <Grommet>
+              <Form
                 onSubmit={async e => {
                   e.preventDefault()
                   await signin()
                   navigate(`/`)
                 }}
               >
-                <Fieldset disabled={loading} aria-busy={loading}>
-                  <Brand mt={[4]}>Sign In</Brand>
+                <Fieldset>
                   <Error error={error} />
-                  <Input
+                  <FormField
                     name="email"
                     type="email"
                     placeholder="email"
@@ -66,7 +61,7 @@ class Signin extends React.Component {
                     onChange={this.handleChange}
                   />
 
-                  <Input
+                  <FormField
                     name="password"
                     type="password"
                     placeholder="password"
@@ -75,12 +70,15 @@ class Signin extends React.Component {
                     onChange={this.handleChange}
                   />
 
-                  <Button type="submit" bg="black" disabled={loading} my={[2]}>
-                    Sign in
-                  </Button>
+                  <Button
+                    type="submit"
+                    label="Sign In"
+                    disabled={loading}
+                    primary
+                  />
                 </Fieldset>
-              </form>
-            </>
+              </Form>
+            </Grommet>
           )
         }}
       </Mutation>

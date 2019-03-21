@@ -5,8 +5,7 @@ import { navigate } from "@reach/router"
 
 import Error from "../components/Error"
 import Fieldset from "../components/styles/Fieldset"
-import Input from "../components/styles/Input"
-import { Button } from "rebass"
+import { Button, Form, FormField, Grommet } from "grommet"
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -43,8 +42,8 @@ class Signup extends React.Component {
     return (
       <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
         {(signup, { loading, error }) => (
-          <>
-            <form
+          <Grommet>
+            <Form
               onSubmit={async e => {
                 e.preventDefault()
                 await signup()
@@ -53,9 +52,8 @@ class Signup extends React.Component {
             >
               <Fieldset disabled={loading} aria-busy={loading}>
                 <Error error={error} />
-                <h1>Sign up</h1>
 
-                <Input
+                <FormField
                   name="name"
                   type="text"
                   placeholder="name"
@@ -63,27 +61,29 @@ class Signup extends React.Component {
                   onChange={this.handleChange}
                 />
 
-                <Input
+                <FormField
                   name="email"
                   type="email"
                   placeholder="email"
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <Input
+                <FormField
                   name="password"
                   type="password"
                   placeholder="password"
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
-
-                <Button type="submit" bg="black" mt={2} disabled={loading}>
-                  Sign up
-                </Button>
+                <Button
+                  type="submit"
+                  label="Sign Up"
+                  disabled={loading}
+                  primary
+                />
               </Fieldset>
-            </form>
-          </>
+            </Form>
+          </Grommet>
         )}
       </Mutation>
     )

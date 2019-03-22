@@ -20,7 +20,7 @@ const categoryPage = ({ data }) => {
             position: "sticky",
             top: "0",
             zIndex: 3,
-            textTransform: "uppercase",
+            textAlign: "center",
           }}
         >
           <Link to={kebabCase(category)}>{category}</Link>

@@ -1,6 +1,8 @@
 import React from "react"
-import { Box } from "rebass"
+import { Box } from "Grommet"
 
-const Container = props => <Box style={{ maxWidth: "620px" }} {...props} />
+const Container = props => (
+  <Box fill="horizontal" style={{ maxWidth: "620px" }} {...props} />
+)
 
 export default Container

@@ -1,7 +1,7 @@
 import React from "react"
 import { Carousel, Text, Heading, Box } from "grommet"
 import Image from "../components/styles/Image"
-import AddToListModal from "../components/AddToListModal"
+import Add from "../components/Add"
 
 const Place = props => {
   const {
@@ -24,7 +24,12 @@ const Place = props => {
   } = props
 
   return (
-    <Box elevation="medium" round="medium" margin={{ vertical: "large" }}>
+    <Box
+      elevation="xsmall"
+      round="medium"
+      background="white"
+      margin={{ vertical: "medium" }}
+    >
       <Heading
         level="2"
         textAlign="center"
@@ -57,11 +62,11 @@ const Place = props => {
           /> 
 
            */}
-        <AddToListModal name={name} />
         <Text
           dangerouslySetInnerHTML={{ __html: html }}
-          margin={{ top: "small" }}
+          margin={{ vertical: "medium" }}
         />
+        <Add name={name} />
       </Box>
     </Box>
   )

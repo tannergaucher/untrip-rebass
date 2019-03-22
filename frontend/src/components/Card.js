@@ -17,7 +17,7 @@ const Card = ({
 }) => {
   return (
     <Box elevation="medium" round="medium" margin={{ vertical: "large" }}>
-      <Box direction="row" align="center" justify="between" margin="small">
+      <Box direction="row" align="center" justify="between" margin="medium">
         <Box>
           <Heading level="6" margin="none">
             {category}

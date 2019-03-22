@@ -4,9 +4,9 @@ import { Instagram, Facebook, Twitter } from "grommet-icons"
 
 const Social = () => (
   <Box direction="row">
-    <Twitter />
-    <Facebook />
-    <Instagram />
+    <Twitter size="small" />
+    <Facebook size="small" />
+    <Instagram size="small" />
   </Box>
 )
 

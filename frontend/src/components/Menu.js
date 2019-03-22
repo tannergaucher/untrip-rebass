@@ -5,7 +5,6 @@ import { graphql, StaticQuery } from "gatsby"
 import { kebabCase } from "lodash"
 
 import Link from "../components/styles/Link"
-import Divider from "../components/styles/Divider"
 
 function Menu() {
   const [open, setOpen] = useState(false)
@@ -53,24 +52,39 @@ function Menu() {
                 responsive={true}
                 style={{ borderRadius: "0" }}
               >
-                <Button onClick={handleClose} icon={<Close />} />
+                <Button
+                  onClick={handleClose}
+                  icon={<Close />}
+                  alignSelf="end"
+                />
 
-                <Box>
-                  <Accordion>
+                <Box
+                  pad="medium"
+                  align="center"
+                  justify="between"
+                  height="100vh"
+                >
+                  <Box margin="medium">
+                    <Heading margin="none">Untrip</Heading>
+                    <Heading level="6" margin="none">
+                      Your Inside Guide To KL
+                    </Heading>
+                  </Box>
+
+                  <Accordion margin={{ vertical: "medium" }}>
                     {edges.map(edge => {
                       const { category, post_ } = edge.node
-
                       return (
                         <AccordionPanel
                           label={
-                            <Heading margin="xsmall" level="2">
+                            <Heading margin="xsmall" level="3">
                               {category}
                             </Heading>
                           }
                           key={category}
                         >
                           <Heading level="4" margin="small">
-                            <Link to={kebabCase(category)}>ALL</Link>
+                            <Link to={kebabCase(category)}>All</Link>
                           </Heading>
                           {post_.map(post => {
                             const { subcategory, id } = post
@@ -90,20 +104,22 @@ function Menu() {
                         </AccordionPanel>
                       )
                     })}
-                    <Divider />
-                    <Heading level="2" margin="xsmall">
+                  </Accordion>
+
+                  <Box align="end" alignSelf="end" pad="medium">
+                    <Heading level="4" margin="xsmall">
                       <Link to="/my-events">Events</Link>
                     </Heading>
-                    <Heading level="2" margin="xsmall">
+                    <Heading level="4" margin="xsmall">
                       <Link to="/my-lists">Lists</Link>
                     </Heading>
-                    <Heading level="2" margin="xsmall">
+                    <Heading level="4" margin="xsmall">
                       <Link to="/profile">Profile</Link>
                     </Heading>
-                    <Heading level="2" margin="xsmall">
+                    <Heading level="4" margin="xsmall">
                       <Link to="/signin"> Sign In </Link>
                     </Heading>
-                  </Accordion>
+                  </Box>
                 </Box>
               </Layer>
             )}

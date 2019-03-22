@@ -27,14 +27,13 @@ const Post = ({ data }) => {
 
   return (
     <Layout>
-      <Container my={[4]} width={[1]}>
-        <Heading>{title}</Heading>
-
+      <Container>
+        <Heading level="1">{title}</Heading>
         <Image fluid={carouselImages[0].fluid} />
-
         <Box as="article">
           {childContentfulPostArticlePreTextNode && (
             <Text
+              margin={{ vertical: "medium" }}
               dangerouslySetInnerHTML={{
                 __html:
                   childContentfulPostArticlePreTextNode.childMarkdownRemark
@@ -72,6 +71,7 @@ const Post = ({ data }) => {
           {childContentfulPostArticleAfterTextNode && (
             <Text
               as="section"
+              margin={{ vertical: "medium" }}
               dangerouslySetInnerHTML={{
                 __html:
                   childContentfulPostArticleAfterTextNode.childMarkdownRemark

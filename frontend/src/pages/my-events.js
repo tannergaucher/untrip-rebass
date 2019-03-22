@@ -30,7 +30,7 @@ const going = ({ data }) => {
             })
 
             return (
-              <Container width={[1]}>
+              <Container>
                 {going.map(event => {
                   const {
                     id,

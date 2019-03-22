@@ -12,7 +12,7 @@ const IndexPage = ({ data }) => {
   const { edges: featured } = data.featured
   return (
     <Layout>
-      <Container width={[1]}>
+      <Container>
         <section>
           {latest.map(edge => {
             const {

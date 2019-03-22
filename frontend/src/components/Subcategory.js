@@ -12,18 +12,26 @@ const Subcategory = ({ category, subcategory, fluid }) => (
     elevation="large"
   >
     <Link to={`/${kebabCase(category)}/${kebabCase(subcategory)}`}>
-      <Heading
-        level="1"
+      <Box
+        pad="medium"
+        background="dark-1"
         style={{
           position: "absolute",
           top: "50%",
           right: "50%",
           zIndex: 1,
-          background: "white",
         }}
       >
-        {subcategory}
-      </Heading>
+        <Heading
+          level="2"
+          margin="none"
+          style={{
+            textTransform: "uppercase",
+          }}
+        >
+          {subcategory}
+        </Heading>
+      </Box>
       <Image fluid={fluid} style={{ borderRadius: "50px" }} />
     </Link>
   </Box>

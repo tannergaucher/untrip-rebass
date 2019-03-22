@@ -1,11 +1,20 @@
 import React from "react"
 import { Carousel } from "grommet"
+import styled from "styled-components"
 import Img from "gatsby-image"
+
+const Image = styled(Img)`
+  height: 250px;
+
+  @media (min-width: 768px) {
+    height: 500px;
+  }
+`
 
 const MyCarousel = ({ images }) => (
   <Carousel>
     {images.map(image => (
-      <Img fluid={image.fluid} style={{ height: "225px" }} />
+      <Image fluid={image.fluid} />
     ))}
   </Carousel>
 )

@@ -1,7 +1,7 @@
 import React from "react"
 import { Heading, Text, Box } from "grommet"
+import Img from "gatsby-image"
 
-import Image from "../components/styles/Image"
 import Layout from "../components/layout"
 import Container from "../components/styles/Container"
 import Event from "../components/Event"
@@ -29,7 +29,7 @@ const Post = ({ data }) => {
     <Layout>
       <Container>
         <Heading level="1">{title}</Heading>
-        <Image fluid={carouselImages[0].fluid} />
+        <Img fluid={carouselImages[0].fluid} />
         <Box as="article">
           {childContentfulPostArticlePreTextNode && (
             <Text
@@ -155,12 +155,12 @@ export const postPageQuery = graphql`
         id
         name
         description
-        openingHours
+        openingHours(formatString: "h:mm A")
+        closingHours(formatString: "h:mm A")
         dateTimeCaveats
         website
         facebook
         instagram
-        closingHours
         address {
           lat
           lon

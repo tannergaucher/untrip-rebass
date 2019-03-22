@@ -1,72 +1,61 @@
 import React from "react"
-import { Carousel, Text, Heading, Box } from "grommet"
-import Image from "../components/styles/Image"
-import Add from "../components/Add"
+import { Text, Heading, Box } from "grommet"
+import Details from "../components/Details"
+import Carousel from "../components/Carousel"
 
 const Place = props => {
   const {
-    id,
     name,
     description,
-    // openingHours,
-    // dateTimeCaveats,
-    // website,
-    // facebook,
-    // instagram,
-    // closingHours,
-    // address: { lat, lon },
+    openingHours,
+    closingHours,
+    price,
+    dateTimeCaveats,
+    website,
+    facebook,
+    instagram,
+    address,
     type: { placeType },
     carouselImages,
-    // location: { neighborhood },
+    location: { city, neighborhood },
     placeArticleText: {
       childContentfulRichText: { html },
     },
   } = props
 
   return (
-    <Box
-      elevation="xsmall"
-      round="medium"
-      background="white"
-      margin={{ vertical: "medium" }}
-    >
-      <Heading
-        level="2"
-        textAlign="center"
-        margin="medium"
-        style={{ position: "sticky", top: 0, zIndex: 3 }}
-      >
-        {name}
-      </Heading>
-      <Carousel>
-        {carouselImages.map(image => (
-          <Image fluid={image.fluid} style={{ height: "225px" }} key={id} />
-        ))}
-      </Carousel>
-
-      <Box margin="medium">
-        <Heading level="5">
-          <em>{description}</em>
+    <Box background="light-3" margin={{ vertical: "medium" }}>
+      <Box pad="medium">
+        <Heading level="2" margin="none">
+          {name}
         </Heading>
-        {/* 
-        TODO 
+        <Heading level="6" margin={{ vertical: "medium" }}>
+          {description}
+        </Heading>
+      </Box>
 
-          <Info
-            close={}
-            caveats={}
-            website={}
-            facebook={}
-            instagram={}
-            address={}
-            open={}
-          /> 
+      <Carousel images={carouselImages} />
 
-           */}
+      <Box>
+        <Details
+          name={name}
+          open={openingHours}
+          close={closingHours}
+          caveats={dateTimeCaveats}
+          price={price}
+          website={website}
+          facebook={facebook}
+          instagram={instagram}
+          address={address}
+          type={placeType}
+          city={city}
+          neighborhood={neighborhood}
+        />
+
         <Text
           dangerouslySetInnerHTML={{ __html: html }}
-          margin={{ vertical: "medium" }}
+          margin={{ horizontal: "medium" }}
         />
-        <Add name={name} />
       </Box>
     </Box>
   )

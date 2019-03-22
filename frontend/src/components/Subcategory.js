@@ -1,8 +1,8 @@
 import React from "react"
 import { Box, Heading } from "grommet"
 import { kebabCase } from "lodash"
+import Img from "gatsby-image"
 
-import Image from "../components/styles/Image"
 import Link from "../components/styles/Link"
 
 const Subcategory = ({ category, subcategory, fluid }) => (
@@ -14,7 +14,7 @@ const Subcategory = ({ category, subcategory, fluid }) => (
     <Link to={`/${kebabCase(category)}/${kebabCase(subcategory)}`}>
       <Box
         pad="medium"
-        background="dark-1"
+        background="rgba(0, 0, 0, .7)"
         style={{
           position: "absolute",
           top: "50%",
@@ -32,7 +32,7 @@ const Subcategory = ({ category, subcategory, fluid }) => (
           {subcategory}
         </Heading>
       </Box>
-      <Image fluid={fluid} style={{ borderRadius: "50px" }} />
+      <Img fluid={fluid} style={{ borderRadius: "50px" }} />
     </Link>
   </Box>
 )

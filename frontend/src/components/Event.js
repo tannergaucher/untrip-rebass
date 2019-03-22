@@ -1,6 +1,7 @@
 import React from "react"
-import { Carousel, Heading, Paragraph } from "grommet"
-import Image from "../components/styles/Image"
+import { Heading, Paragraph } from "grommet"
+
+import Carousel from "../components/Carousel"
 import AddEvent from "../containers/AddEvent"
 
 const Event = props => {
@@ -25,15 +26,9 @@ const Event = props => {
   return (
     <>
       <Heading level="1">{name}</Heading>
-
-      <Carousel>
-        {carouselImages.map(image => (
-          <Image fluid={image.fluid} style={{ height: "225px" }} />
-        ))}
-      </Carousel>
+      <Carousel images={carouselImages} />
       <Heading level="3">{description}</Heading>
       <AddEvent postId={postId} />
-
       <Heading level="6">
         <a href={website}>Website</a>
       </Heading>

@@ -1,11 +1,12 @@
 import React from "react"
 import { Heading, Box } from "grommet"
-import Image from "../components/styles/Image"
+import Img from "gatsby-image"
 
 const Avatar = ({ fluid, published, name, social }) => (
   <a href={social} style={{ textDecoration: "none" }}>
     <Box direction="row" justify="end" margin="medium">
-      <Image
+      {/* TODO: turn into fixed image */}
+      <Img
         fluid={fluid}
         style={{ height: "40px", width: "40px", borderRadius: "50%" }}
       />

@@ -26,11 +26,6 @@ const categoryPage = ({ data }) => {
           <Link to={kebabCase(category)}>{category}</Link>
         </Heading>
 
-        {/* Todo: make a FilterLinks component
-        1. Pull in categories, 
-        2. Highlight active category, 
-        3. Navigate to category on click  */}
-
         {post_.map(post => {
           const { subcategory: subcategories } = post
 

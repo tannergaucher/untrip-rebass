@@ -1,9 +1,9 @@
 import React from "react"
-import { Carousel, Heading, Box } from "grommet"
+import { Heading, Box } from "grommet"
 import { Location } from "grommet-icons"
 
+import Carousel from "../components/Carousel"
 import Social from "../components/Social"
-import Image from "./styles/Image"
 import Link from "./styles/Link"
 
 const Card = ({
@@ -35,11 +35,7 @@ const Card = ({
         </Box>
       </Box>
 
-      <Carousel>
-        {carouselImages.map(image => (
-          <Image fluid={image.fluid} style={{ height: "225px" }} />
-        ))}
-      </Carousel>
+      <Carousel images={carouselImages} />
 
       <Box margin="small">
         <Social />

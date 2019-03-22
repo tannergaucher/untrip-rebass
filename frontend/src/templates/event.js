@@ -1,11 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Carousel, Grommet } from "grommet"
 
 import Container from "../components/styles/Container"
 import Layout from "../components/layout"
-import Image from "../components/styles/Image"
 import Map from "../components/Map"
+import Carousel from "../components/Carousel"
 
 const eventPage = ({ data }) => {
   const { event } = data
@@ -30,13 +29,7 @@ const eventPage = ({ data }) => {
     <Layout>
       <Container width={[1]}>
         <h1>{name}</h1>
-        <Grommet>
-          <Carousel>
-            {carouselImages.map(image => (
-              <Image fluid={image.fluid} style={{ height: "225px" }} />
-            ))}
-          </Carousel>
-        </Grommet>
+        <Carousel images={carouselImages} />
         <h6>{description}</h6>
         <h6>{website}</h6>
         <h6>{facebook}</h6>

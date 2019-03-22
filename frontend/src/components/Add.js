@@ -20,9 +20,8 @@ function Add({ name }) {
   return (
     <>
       <DropButton
-        label={`Add ${name} to list`}
+        label={`${name} to My Untrip`}
         icon={<AddIcon size="small" />}
-        reverse={true}
         plain={true}
         alignSelf="end"
         dropAlign={{ top: "bottom", right: "right" }}

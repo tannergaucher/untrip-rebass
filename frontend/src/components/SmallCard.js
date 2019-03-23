@@ -5,12 +5,12 @@ import Img from "gatsby-image"
 const SmallCard = ({ title, intro, fluid }) => (
   <Box direction="row" justify="between">
     <Box>
-      <Heading level="3" margin="xsmall">
+      <Heading level="3" margin="none">
         {title}
       </Heading>
-      <Text margin="xsmall">{intro}</Text>
+      <Text margin="none">{intro}</Text>
     </Box>
-    <Img fluid={fluid} style={{ height: "100px", width: "100px" }} />
+    <Img fluid={fluid} style={{ height: "90px", width: "90px" }} />
   </Box>
 )
 

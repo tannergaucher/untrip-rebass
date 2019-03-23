@@ -12,35 +12,37 @@ import {
 
 import { Close, Add as AddIcon } from "grommet-icons"
 
-// Todo: seperate into DropAdd and AddModal
-
 function Add({ name }) {
   const [showModal, setShowModal] = useState(false)
 
   return (
     <>
       <DropButton
-        label={`${name} to My Untrip`}
-        icon={<AddIcon size="small" />}
-        plain={true}
-        alignSelf="end"
-        dropAlign={{ top: "bottom", right: "right" }}
+        label={`Add ${name} to My Untrip`}
+        color="light-4"
+        dropAlign={{ top: "top", right: "right" }}
         margin="medium"
+        stretch={false}
         dropContent={
           <Box pad="medium">
-            <Heading level="6">Good Work Cafes Near Bangsar</Heading>
-            <Heading level="6">Secret Date Spots</Heading>
-            <Heading level="6">Nasi Lemak is Life, Life is Nasi Lemak</Heading>
-            <Heading level="6">
-              <Anchor onClick={() => setShowModal(true)} icon={<Add />}>
-                {name}
-              </Anchor>
+            <Heading level="6" margin="medium">
+              Good Work Cafes Near Bangsar
             </Heading>
+            <Heading level="6" margin="medium">
+              Secret Date Spots
+            </Heading>
+            <Heading level="6" margin="medium">
+              Nasi Lemak is Life, Life is Nasi Lemak
+            </Heading>
+            <Button
+              onClick={() => setShowModal(true)}
+              margin="medium"
+              label="Start new list"
+            />
           </Box>
         }
         style={{ fontSize: "12px" }}
       />
-
       {showModal && (
         <Layer
           onEsc={() => setShowModal(false)}

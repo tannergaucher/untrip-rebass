@@ -1,74 +1,88 @@
 import React from "react"
 import { navigate } from "@reach/router"
 import { kebabCase } from "lodash"
-import { Box, Heading, Anchor, Ticket } from "grommet"
-
+import { Box, Anchor } from "grommet"
 import {
-  Facebook,
-  Instagram,
-  Domain,
   Location,
-  MapLocation,
   Clock,
   Organization,
+  Domain,
+  Facebook,
+  Instagram,
+  Phone,
+  Calendar,
 } from "grommet-icons"
 
-const Detail = props => (
-  <Heading
-    {...props}
-    style={{ fontSize: "12px", textTransform: "uppercase" }}
-  />
-)
+import Detail from "../components/styles/Detail"
 
 const Details = ({
-  name,
   open,
   close,
   caveats,
+  price,
+  type,
+  neighborhood,
+  name,
   website,
   facebook,
   instagram,
   phone,
-  price,
-  type,
-  neighborhood,
 }) => (
-  <Box wrap pad="medium">
-    <Detail margin="none">
-      <Anchor
-        icon={<Organization size="small" />}
-        label={type}
-        onClick={() => navigate(`/business/${kebabCase(type)}`)}
-      />
-    </Detail>
-    <Detail margin="none">
-      <Anchor
-        icon={<Location size="small" />}
-        label={neighborhood}
-        onClick={() => navigate(`/${kebabCase(neighborhood)}`)}
-      />
-    </Detail>
-
-    <Box direction="row" align="center">
-      <Clock size="small" />
-      <Detail margin={{ vertical: "none", left: "small" }}>
-        {open} - {close}
+  <Box pad="medium" background="light-3" fill="horizontal">
+    {type && (
+      <Detail margin="none">
+        <Anchor
+          icon={<Organization size="small" />}
+          label={type}
+          margin="none"
+          onClick={() => navigate(`/business/${kebabCase(type)}`)}
+        />
       </Detail>
-    </Box>
-
-    {caveats && <Detail>{caveats}</Detail>}
-    {price && <Detail>{price}</Detail>}
-    {phone && <Detail>{phone}</Detail>}
-
-    <Box direction="row" justify="start">
-      <Anchor icon={<Facebook size="small" />} href={facebook} />
-      <Anchor icon={<Instagram size="small" />} href={instagram} />
-      <Anchor icon={<Domain size="small" />} href={website} />
-      <Anchor
-        icon={<MapLocation size="small" />}
-        onClick={() => navigate(`/places/${kebabCase(name)}`)}
-      />
-    </Box>
+    )}
+    {neighborhood && (
+      <Detail margin="none">
+        <Anchor
+          icon={<Location size="small" />}
+          label={neighborhood}
+          onClick={() => navigate(`/${kebabCase(neighborhood)}`)}
+        />
+      </Detail>
+    )}
+    {open && (
+      <Detail margin="none">
+        <Anchor icon={<Clock size="small" />} label={open} />
+      </Detail>
+    )}
+    {caveats && (
+      <Detail margin="none">
+        <Anchor icon={<Calendar size="small" />} label={caveats} />
+      </Detail>
+    )}
+    {price && <Detail>$ {price}</Detail>}
+    {facebook && (
+      <Detail margin="none">
+        <Anchor icon={<Facebook size="small" />} label="On Facebook" />
+      </Detail>
+    )}
+    {instagram && (
+      <Detail margin="none">
+        <Anchor icon={<Instagram size="small" />} label="On Instagram" />
+      </Detail>
+    )}
+    {website && (
+      <Detail margin="none">
+        <Anchor
+          icon={<Domain size="small" />}
+          label={`${name} website`}
+          href={website}
+        />
+      </Detail>
+    )}
+    {phone && (
+      <Detail margin="none">
+        <Anchor icon={<Phone size="small" />} label={phone} />
+      </Detail>
+    )}
   </Box>
 )
 

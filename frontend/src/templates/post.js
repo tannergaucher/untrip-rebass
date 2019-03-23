@@ -7,6 +7,7 @@ import Container from "../components/styles/Container"
 import Event from "../components/Event"
 import Place from "../components/Place"
 import Avatar from "../components/Avatar"
+import SocialShare from "../components/SocialShare"
 
 const Post = ({ data }) => {
   const {
@@ -30,6 +31,7 @@ const Post = ({ data }) => {
       <Container>
         <Heading level="1">{title}</Heading>
         <Img fluid={carouselImages[0].fluid} />
+        <SocialShare />
         <Box as="article">
           {childContentfulPostArticlePreTextNode && (
             <Text

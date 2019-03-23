@@ -11,7 +11,17 @@ const theme = {
       brand: "black",
     },
   },
-  accordion: {},
+  accordion: {
+    border: {
+      side: "bottom",
+      color: "light-3",
+    },
+  },
+  carousel: {
+    icons: {
+      color: "dark-1",
+    },
+  },
 }
 
 const Layout = ({ children }) => (

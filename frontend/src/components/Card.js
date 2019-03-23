@@ -1,9 +1,10 @@
 import React from "react"
-import { Heading, Box } from "grommet"
-import { Location } from "grommet-icons"
+import { Heading, Box, Button } from "grommet"
+import { Location, Facebook, Instagram, Twitter } from "grommet-icons"
+import { navigate } from "@reach/router"
 
 import Carousel from "../components/Carousel"
-import Social from "../components/Social"
+import SocialShare from "../components/SocialShare"
 import Link from "./styles/Link"
 
 const Card = ({
@@ -11,36 +12,40 @@ const Card = ({
   intro,
   category,
   neighborhood,
-  date,
+  // date,
   carouselImages,
   slug,
 }) => {
   return (
-    <Box elevation="medium" round="medium" margin={{ vertical: "large" }}>
-      <Box direction="row" align="center" justify="between" margin="medium">
-        <Box>
-          <Heading level="6" margin="none">
+    <Box
+      margin={{ vertical: "large" }}
+      style={{ position: "relative" }}
+      pad={{ vertical: "large" }}
+    >
+      <Box>
+        <Box direction="row" align="center">
+          <Heading
+            level="6"
+            margin={{ right: "small", vertical: "none" }}
+            style={{ textTransform: "uppercase" }}
+            color="light-6"
+          >
             {category}
           </Heading>
-          <Heading level="6" margin="none">
-            {date}
-          </Heading>
+          <Box direction="row" align="center">
+            <Location color="light-6" size="small" />
+            <Heading
+              level="6"
+              margin={{ left: "small", vertical: "none" }}
+              style={{ textTransform: "uppercase" }}
+              color="light-6"
+            >
+              {neighborhood}
+            </Heading>
+          </Box>
         </Box>
-
-        <Box direction="row" align="center">
-          <Location size="small" />
-          <Heading level="6" margin={{ vertical: "small", left: "xsmall" }}>
-            {neighborhood}
-          </Heading>
-        </Box>
-      </Box>
-
-      <Carousel images={carouselImages} />
-
-      <Box margin="small">
-        <Social />
         <Link to={slug}>
-          <Heading level="2" margin={{ vertical: "xsmall" }}>
+          <Heading level="1" margin={{ vertical: "xsmall" }}>
             {title}
           </Heading>
           <Heading level="6" margin={{ vertical: "xsmall" }}>
@@ -48,6 +53,18 @@ const Card = ({
           </Heading>
         </Link>
       </Box>
+      <Carousel images={carouselImages} />
+      <Box alignSelf="end">
+        <SocialShare />
+      </Box>
+      <Button
+        label="Read"
+        alignSelf="end"
+        color="light-6"
+        onClick={() => navigate(`${slug}`)}
+        margin={{ top: "medium" }}
+      />
+      <Box />
     </Box>
   )
 }

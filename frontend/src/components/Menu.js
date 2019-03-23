@@ -57,7 +57,6 @@ function Menu() {
                   icon={<Close />}
                   alignSelf="end"
                 />
-
                 <Box
                   pad="medium"
                   align="center"
@@ -70,20 +69,19 @@ function Menu() {
                       Your Inside Guide To KL
                     </Heading>
                   </Box>
-
                   <Accordion margin={{ vertical: "medium" }}>
                     {edges.map(edge => {
                       const { category, post_ } = edge.node
                       return (
                         <AccordionPanel
                           label={
-                            <Heading margin="xsmall" level="3">
+                            <Heading margin="medium" level="3">
                               {category}
                             </Heading>
                           }
                           key={category}
                         >
-                          <Heading level="4" margin="small">
+                          <Heading level="4" margin="medium">
                             <Link to={kebabCase(category)}>All</Link>
                           </Heading>
                           {post_.map(post => {
@@ -95,7 +93,7 @@ function Menu() {
                                 )}`}
                                 key={id}
                               >
-                                <Heading level="4" margin="small">
+                                <Heading level="4" margin="medium">
                                   {node.subcategory}
                                 </Heading>
                               </Link>
@@ -105,16 +103,9 @@ function Menu() {
                       )
                     })}
                   </Accordion>
-
                   <Box align="end" alignSelf="end" pad="medium">
                     <Heading level="4" margin="xsmall">
-                      <Link to="/my-events">Events</Link>
-                    </Heading>
-                    <Heading level="4" margin="xsmall">
-                      <Link to="/my-lists">Lists</Link>
-                    </Heading>
-                    <Heading level="4" margin="xsmall">
-                      <Link to="/profile">Profile</Link>
+                      <Link to="/me">My Untrip</Link>
                     </Heading>
                     <Heading level="4" margin="xsmall">
                       <Link to="/signin"> Sign In </Link>

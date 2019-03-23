@@ -12,7 +12,7 @@ const Image = styled(Img)`
 `
 
 const MyCarousel = ({ images }) => (
-  <Carousel>
+  <Carousel a11yTitl="image carousel" play="6000">
     {images.map(image => (
       <Image fluid={image.fluid} />
     ))}

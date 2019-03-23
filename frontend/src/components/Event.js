@@ -1,20 +1,28 @@
 import React from "react"
-import { Heading, Paragraph } from "grommet"
+import { Heading, Box, Text } from "grommet"
 
 import Carousel from "../components/Carousel"
 import AddEvent from "../containers/AddEvent"
+import Details from "./Details"
 
 const Event = props => {
   const {
-    postId,
-    name,
+    id,
+    name: eventName,
     description,
+    eventStarts,
+    eventEnds,
+    dateTimeCateats,
     website,
     facebook,
     instagram,
+    ticketLink,
     price,
-    eventStarts,
-    eventEnds,
+    type,
+    place: {
+      name: placeName,
+      location: { neighborhood },
+    },
     carouselImages,
     articleText: {
       childContentfulEventArticleTextEventArticleTextTextNode: {
@@ -24,26 +32,34 @@ const Event = props => {
   } = props
 
   return (
-    <>
-      <Heading level="1">{name}</Heading>
+    <Box background="light-2" margin={{ vertical: "large" }}>
+      <Heading level="3" margin="medium">
+        {eventName}
+      </Heading>
+      <Heading level="3" margin="medium">
+        {description}
+      </Heading>
       <Carousel images={carouselImages} />
-      <Heading level="3">{description}</Heading>
-      <AddEvent postId={postId} />
-      <Heading level="6">
-        <a href={website}>Website</a>
-      </Heading>
-      <Heading level="6">
-        <a href={instagram}>Instagram</a>
-      </Heading>
-      <Heading level="6">
-        <a href={facebook}>Facebook</a>
-      </Heading>
-      <Heading level="6">{price}</Heading>
-      <Heading level="6">
-        {eventStarts} to {eventEnds}
-      </Heading>
-      <Paragraph dangerouslySetInnerHTML={{ __html: html }} />
-    </>
+      <Details
+        eventStarts={eventStarts}
+        eventEnds={eventEnds}
+        caveats={dateTimeCateats}
+        price={price}
+        website={website}
+        facebook={facebook}
+        instagram={instagram}
+        tickets={ticketLink}
+        type={type[0].type}
+        place={placeName}
+        neighborhood={neighborhood}
+      />
+      <AddEvent eventId={id} />
+      <Text
+        margin="medium"
+        size="14px"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    </Box>
   )
 }
 

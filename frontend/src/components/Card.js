@@ -48,22 +48,13 @@ const Card = ({
           <Heading level="1" margin={{ vertical: "xsmall" }}>
             {title}
           </Heading>
-          <Heading level="6" margin={{ vertical: "xsmall" }}>
-            {intro}
-          </Heading>
         </Link>
       </Box>
       <Carousel images={carouselImages} />
-      <Box alignSelf="end">
-        <SocialShare />
-      </Box>
-      <Button
-        label="Read"
-        alignSelf="end"
-        color="light-6"
-        onClick={() => navigate(`${slug}`)}
-        margin={{ top: "medium" }}
-      />
+      <Heading level="6" margin={{ vertical: "medium" }}>
+        {intro}
+      </Heading>
+      {/* <SocialShare /> */}
       <Box />
     </Box>
   )

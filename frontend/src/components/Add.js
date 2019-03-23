@@ -18,11 +18,10 @@ function Add({ name }) {
   return (
     <>
       <DropButton
-        label={`Add ${name} to My Untrip`}
+        label={`Add ${name} to list`}
         color="light-4"
         dropAlign={{ top: "top", right: "right" }}
-        margin="medium"
-        stretch={false}
+        margin={{ horizontal: "medium" }}
         dropContent={
           <Box pad="medium">
             <Heading level="6" margin="medium">

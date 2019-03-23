@@ -47,7 +47,7 @@ const Post = ({ data }) => {
           {events && (
             <Box as="section">
               {events.map(event => (
-                <Event {...event} key={event.id} postId={id} />
+                <Event {...event} key={event.id} />
               ))}
             </Box>
           )}
@@ -137,9 +137,20 @@ export const postPageQuery = graphql`
         website
         facebook
         instagram
+        ticketLink
         price
-        eventStarts
-        eventEnds
+        eventStarts(formatString: "h:mm A")
+        eventEnds(formatString: "h:mm A")
+        dateTimeCaveats
+        type {
+          type
+        }
+        place {
+          name
+          location {
+            neighborhood
+          }
+        }
         articleText {
           childContentfulEventArticleTextEventArticleTextTextNode {
             childMarkdownRemark {

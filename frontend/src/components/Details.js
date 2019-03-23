@@ -11,6 +11,8 @@ import {
   Instagram,
   Phone,
   Calendar,
+  Ticket,
+  Currency,
 } from "grommet-icons"
 
 import Detail from "../components/styles/Detail"
@@ -22,25 +24,26 @@ const Details = ({
   price,
   type,
   neighborhood,
-  name,
   website,
   facebook,
   instagram,
   phone,
+  eventStarts,
+  eventEnds,
+  tickets,
 }) => (
-  <Box pad="medium" background="light-3" fill="horizontal">
+  <Box pad="medium">
     {type && (
-      <Detail margin="none">
+      <Detail>
         <Anchor
           icon={<Organization size="small" />}
           label={type}
-          margin="none"
           onClick={() => navigate(`/business/${kebabCase(type)}`)}
         />
       </Detail>
     )}
     {neighborhood && (
-      <Detail margin="none">
+      <Detail>
         <Anchor
           icon={<Location size="small" />}
           label={neighborhood}
@@ -49,40 +52,55 @@ const Details = ({
       </Detail>
     )}
     {open && (
-      <Detail margin="none">
-        <Anchor icon={<Clock size="small" />} label={open} />
+      <Detail>
+        <Anchor icon={<Clock size="small" />} label={`${open} - ${close}`} />
       </Detail>
     )}
-    {caveats && (
-      <Detail margin="none">
-        <Anchor icon={<Calendar size="small" />} label={caveats} />
-      </Detail>
-    )}
-    {price && <Detail>$ {price}</Detail>}
-    {facebook && (
-      <Detail margin="none">
-        <Anchor icon={<Facebook size="small" />} label="On Facebook" />
-      </Detail>
-    )}
-    {instagram && (
-      <Detail margin="none">
-        <Anchor icon={<Instagram size="small" />} label="On Instagram" />
-      </Detail>
-    )}
-    {website && (
-      <Detail margin="none">
+    {eventStarts && (
+      <Detail>
         <Anchor
-          icon={<Domain size="small" />}
-          label={`${name} website`}
-          href={website}
+          icon={<Clock size="small" />}
+          label={`${eventStarts} - ${eventEnds}`}
         />
       </Detail>
     )}
-    {phone && (
-      <Detail margin="none">
-        <Anchor icon={<Phone size="small" />} label={phone} />
+    {caveats && (
+      <Detail>
+        <Anchor icon={<Calendar size="small" />} label={caveats} />
       </Detail>
     )}
+    {price && (
+      <Detail>
+        <Anchor icon={<Currency size="small" />} label={price} />{" "}
+      </Detail>
+    )}
+    <Box direction="row" wrap>
+      {tickets && (
+        <Detail>
+          <Anchor icon={<Ticket size="small" />} />
+        </Detail>
+      )}
+      {facebook && (
+        <Detail>
+          <Anchor icon={<Facebook size="small" />} href={facebook} />
+        </Detail>
+      )}
+      {instagram && (
+        <Detail>
+          <Anchor icon={<Instagram size="small" />} href={instagram} />
+        </Detail>
+      )}
+      {website && (
+        <Detail>
+          <Anchor icon={<Domain size="small" />} href={website} />
+        </Detail>
+      )}
+      {phone && (
+        <Detail>
+          <Anchor icon={<Phone size="small" />} label={phone} />
+        </Detail>
+      )}
+    </Box>
   </Box>
 )
 

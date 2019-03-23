@@ -28,41 +28,35 @@ const Place = props => {
 
   return (
     <Box background="light-2" margin={{ vertical: "large" }}>
-      <Heading
-        level="2"
-        margin="medium"
-        alignSelf="center"
-        style={{ position: "sticky", top: 0, zIndex: 3 }}
-      >
+      <Heading level="3" margin="medium">
         {name}
       </Heading>
-      <Heading level="6" margin="medium" alignSelf="center">
+      <Heading level="6" margin="medium" color="dark-4">
         {description}
       </Heading>
       <Carousel images={carouselImages} />
       <Box>
-        <Box direction="row" justify="around">
-          <Details
-            name={name}
-            open={openingHours}
-            close={closingHours}
-            caveats={dateTimeCaveats}
-            price={price}
-            type={placeType}
-            city={city}
-            neighborhood={neighborhood}
-            address={address}
-            phone={phone}
-            website={website}
-            facebook={facebook}
-            instagram={instagram}
-            phone="555 555 5555"
-          />
-          <Add name={name} />
-        </Box>
+        <Details
+          name={name}
+          open={openingHours}
+          close={closingHours}
+          caveats={dateTimeCaveats}
+          price={price}
+          type={placeType}
+          city={city}
+          neighborhood={neighborhood}
+          address={address}
+          phone={phone}
+          website={website}
+          facebook={facebook}
+          instagram={instagram}
+          phone="555 555 5555"
+        />
+        <Add name={name} />
         <Text
           dangerouslySetInnerHTML={{ __html: html }}
-          margin={{ horizontal: "medium" }}
+          margin="medium"
+          size="14px"
         />
       </Box>
     </Box>

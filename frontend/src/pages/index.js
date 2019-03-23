@@ -55,13 +55,12 @@ const IndexPage = ({ data }) => {
             return (
               <Box key={id}>
                 <Heading level="4">{category}</Heading>
-                <Link to={slug}>
-                  <SmallCard
-                    title={title}
-                    intro={introSentence}
-                    fluid={fluid}
-                  />
-                </Link>
+                <SmallCard
+                  title={title}
+                  intro={introSentence}
+                  fluid={fluid}
+                  slug={slug}
+                />
               </Box>
             )
           })}

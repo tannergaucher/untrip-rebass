@@ -15,12 +15,22 @@ const subcategoryPage = ({ data }) => {
 
         {post_.map(post => {
           const {
+            id,
             title,
+            slug,
             introSentence,
             cardImage: { fluid },
           } = post
 
-          return <SmallCard title={title} intro={introSentence} fluid={fluid} />
+          return (
+            <SmallCard
+              title={title}
+              intro={introSentence}
+              fluid={fluid}
+              slug={slug}
+              key={id}
+            />
+          )
         })}
       </Container>
     </Layout>
@@ -34,6 +44,7 @@ export const subcategoryPageQuery = graphql`
     contentfulSubcategory(subcategory: { eq: $subcategory }) {
       subcategory
       post_ {
+        id
         title
         slug
         introSentence

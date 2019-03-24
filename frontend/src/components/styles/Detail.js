@@ -4,7 +4,11 @@ import { Heading } from "grommet"
 const Detail = props => (
   <Heading
     {...props}
-    style={{ fontSize: "10px", textTransform: "uppercase" }}
+    style={{
+      fontSize: "10px",
+      textTransform: "uppercase",
+      fontFamily: "monospace",
+    }}
   />
 )
 

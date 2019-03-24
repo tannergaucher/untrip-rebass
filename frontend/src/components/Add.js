@@ -18,10 +18,12 @@ function Add({ name }) {
   return (
     <>
       <DropButton
-        label={`Add ${name} to list`}
-        color="light-4"
+        label={`${name} to List`}
+        color="accent-3"
+        icon={<AddIcon size="small" />}
         dropAlign={{ top: "top", right: "right" }}
-        margin={{ horizontal: "medium" }}
+        margin={{ vertical: "medium" }}
+        alignSelf="end"
         dropContent={
           <Box pad="medium">
             <Heading level="6" margin="medium">

@@ -1,15 +1,17 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Box, Heading } from "grommet"
+import { kebabCase } from "lodash"
 
 import Layout from "../components/layout"
 import User from "../containers/User"
 import PleaseSignin from "../containers/PleaseSignin"
-import Card from "../components/Card"
+import RemoveEvent from "../containers/RemoveEvent"
 import Container from "../components/styles/Container"
+import Link from "../components/styles/Link"
 
-const going = ({ data }) => {
-  const { edges: allEvents } = data.allContentfulPost
-
+const myEvents = ({ data }) => {
+  const { edges: allEvents } = data.allContentfulEvent
   return (
     <Layout>
       <PleaseSignin>
@@ -17,37 +19,29 @@ const going = ({ data }) => {
           {({ data, loading, error }) => {
             if (loading) return <p>loading...</p>
             if (error) return <p>{error.message}</p>
-            const { events } = data.me
 
+            const { events } = data.me
             const going = events.map(event => {
               const goingNodes = []
               allEvents.filter(allEvent => {
-                if (allEvent.node.id === event.postId) {
+                if (allEvent.node.id === event.eventId) {
                   goingNodes.push(allEvent)
                 }
               })
               return goingNodes
             })
-
             return (
               <Container>
+                <Heading>My Events</Heading>
                 {going.map(event => {
-                  const {
-                    id,
-                    title,
-                    introSentence,
-                    category: { category },
-                    carouselImages,
-                  } = event[0].node
-
+                  const { id, name } = event[0].node
                   return (
-                    <Card
-                      title={title}
-                      intro={introSentence}
-                      category={category}
-                      carouselImages={carouselImages}
-                      key={id}
-                    />
+                    <Box key={id}>
+                      <Link to={`/events/${kebabCase(name)}`}>
+                        <Heading level="3">{name}</Heading>
+                      </Link>
+                      <RemoveEvent eventId={id} />
+                    </Box>
                   )
                 })}
               </Container>
@@ -59,25 +53,14 @@ const going = ({ data }) => {
   )
 }
 
-export default going
-
+export default myEvents
 export const allEventsQuery = graphql`
   query allEventsQuery {
-    allContentfulPost {
+    allContentfulEvent {
       edges {
         node {
+          name
           id
-          title
-          introSentence
-          category {
-            category
-          }
-          carouselImages {
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-          slug
         }
       }
     }

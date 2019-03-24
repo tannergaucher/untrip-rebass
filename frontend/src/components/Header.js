@@ -13,9 +13,7 @@ const Header = ({ title }) => (
     style={{ position: "sticky", top: 0, zIndex: 2, opacity: ".97" }}
   >
     <Link to="/">
-      <Heading level="4" margin="small">
-        {title}
-      </Heading>
+      <Heading level="4">{title}</Heading>
     </Link>
     <Menu />
   </Box>

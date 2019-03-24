@@ -7,7 +7,7 @@ import Container from "../components/styles/Container"
 import Event from "../components/Event"
 import Place from "../components/Place"
 import Avatar from "../components/Avatar"
-import SocialShare from "../components/SocialShare"
+import Share from "../components/Share"
 
 const Post = ({ data }) => {
   const {
@@ -16,9 +16,10 @@ const Post = ({ data }) => {
     published,
     author: {
       name,
+      socialLink,
       avatarImage: { fluid: avatarFluid },
     },
-    carouselImages,
+    cardImage: { fluid },
     childContentfulPostArticlePreTextNode,
     childContentfulPostArticleMainTextNode,
     childContentfulPostArticleAfterTextNode,
@@ -29,9 +30,11 @@ const Post = ({ data }) => {
   return (
     <Layout>
       <Container>
-        <Heading level="1">{title}</Heading>
-        <Img fluid={carouselImages[0].fluid} />
-        <SocialShare />
+        <Heading level="1" margin={{ vertical: "large" }}>
+          {title}
+        </Heading>
+        <Img fluid={fluid} />
+        <Share />
         <Box as="article">
           {childContentfulPostArticlePreTextNode && (
             <Text
@@ -43,7 +46,6 @@ const Post = ({ data }) => {
               }}
             />
           )}
-
           {events && (
             <Box as="section">
               {events.map(event => (
@@ -51,7 +53,6 @@ const Post = ({ data }) => {
               ))}
             </Box>
           )}
-
           {childContentfulPostArticleMainTextNode && (
             <Text
               dangerouslySetInnerHTML={{
@@ -61,7 +62,6 @@ const Post = ({ data }) => {
               }}
             />
           )}
-
           {places && (
             <Box as="section">
               {places.map(place => (
@@ -69,7 +69,6 @@ const Post = ({ data }) => {
               ))}
             </Box>
           )}
-
           {childContentfulPostArticleAfterTextNode && (
             <Text
               as="section"
@@ -82,12 +81,11 @@ const Post = ({ data }) => {
             />
           )}
         </Box>
-
         <Avatar
           name={name}
           published={published}
           fluid={avatarFluid}
-          social="http://www.twitter.com/tannergaucher"
+          social={socialLink}
         />
       </Container>
     </Layout>
@@ -104,6 +102,7 @@ export const postPageQuery = graphql`
       published(formatString: "MM/DD/YYYY")
       author {
         name
+        socialLink
         avatarImage {
           fluid {
             ...GatsbyContentfulFluid
@@ -111,6 +110,17 @@ export const postPageQuery = graphql`
         }
       }
       carouselImages {
+        description
+        credit
+        source
+        sourceLink
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+      }
+      cardImage {
         fluid {
           ...GatsbyContentfulFluid
         }
@@ -159,8 +169,14 @@ export const postPageQuery = graphql`
           }
         }
         carouselImages {
-          fluid {
-            ...GatsbyContentfulFluid
+          description
+          credit
+          source
+          sourceLink
+          image {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
           }
         }
       }
@@ -182,8 +198,14 @@ export const postPageQuery = graphql`
           placeType
         }
         carouselImages {
-          fluid {
-            ...GatsbyContentfulFluid
+          description
+          credit
+          source
+          sourceLink
+          image {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
           }
         }
         location {

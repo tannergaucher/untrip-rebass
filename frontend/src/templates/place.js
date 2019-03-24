@@ -97,8 +97,14 @@ export const placePageQuery = graphql`
         slug
       }
       carouselImages {
-        fluid {
-          ...GatsbyContentfulFluid
+        description
+        credit
+        source
+        sourceLink
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
         }
       }
     }

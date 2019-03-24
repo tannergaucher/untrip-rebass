@@ -4,7 +4,12 @@ import Img from "gatsby-image"
 
 const Avatar = ({ fluid, published, name, social }) => (
   <a href={social} style={{ textDecoration: "none" }}>
-    <Box direction="row" justify="end" margin="medium">
+    <Box
+      direction="row"
+      justify="end"
+      align="center"
+      margin={{ vertical: "medium" }}
+    >
       {/* TODO: turn into fixed image */}
       <Img
         fluid={fluid}

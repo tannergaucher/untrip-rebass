@@ -27,15 +27,12 @@ const Place = props => {
   } = props
 
   return (
-    <Box background="light-2" margin={{ vertical: "large" }}>
-      <Heading level="3" margin="medium">
+    <Box margin={{ vertical: "large" }}>
+      <Heading level={2} margin={{ vertical: "medium" }}>
         {name}
       </Heading>
-      <Heading level="6" margin="medium" color="dark-4">
-        {description}
-      </Heading>
       <Carousel images={carouselImages} />
-      <Box>
+      <Box margin={{ vertical: "medium" }}>
         <Details
           name={name}
           open={openingHours}
@@ -53,11 +50,7 @@ const Place = props => {
           phone="555 555 5555"
         />
         <Add name={name} />
-        <Text
-          dangerouslySetInnerHTML={{ __html: html }}
-          margin="medium"
-          size="14px"
-        />
+        <Text dangerouslySetInnerHTML={{ __html: html }} size="small" />
       </Box>
     </Box>
   )

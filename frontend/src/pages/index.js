@@ -5,7 +5,6 @@ import Layout from "../components/layout"
 import Container from "../components/styles/Container"
 import Card from "../components/Card"
 import SmallCard from "../components/SmallCard"
-import Link from "../components/styles/Link"
 
 const IndexPage = ({ data }) => {
   const { edges: latest } = data.latest
@@ -41,7 +40,6 @@ const IndexPage = ({ data }) => {
             )
           })}
         </section>
-
         <div>
           {featured.map(edge => {
             const { category, id } = edge.node
@@ -51,7 +49,6 @@ const IndexPage = ({ data }) => {
               title,
               cardImage: { fluid },
             } = edge.node.post_[0]
-
             return (
               <Box key={id}>
                 <Heading level="4">{category}</Heading>
@@ -89,8 +86,14 @@ export const INDEX_PAGE_QUERY = graphql`
             category
           }
           carouselImages {
-            fluid {
-              ...GatsbyContentfulFluid
+            description
+            credit
+            source
+            sourceLink
+            image {
+              fluid {
+                ...GatsbyContentfulFluid
+              }
             }
           }
           cardImage {

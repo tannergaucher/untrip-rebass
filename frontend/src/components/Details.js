@@ -1,7 +1,7 @@
 import React from "react"
 import { navigate } from "@reach/router"
 import { kebabCase } from "lodash"
-import { Box, Anchor } from "grommet"
+import { Box, Anchor, Button } from "grommet"
 import {
   Location,
   Clock,
@@ -32,72 +32,99 @@ const Details = ({
   eventEnds,
   tickets,
 }) => (
-  <Box pad="medium">
-    {type && (
-      <Detail>
-        <Anchor
-          icon={<Organization size="small" />}
-          label={type}
-          onClick={() => navigate(`/business/${kebabCase(type)}`)}
-        />
-      </Detail>
-    )}
-    {neighborhood && (
-      <Detail>
-        <Anchor
-          icon={<Location size="small" />}
-          label={neighborhood}
-          onClick={() => navigate(`/${kebabCase(neighborhood)}`)}
-        />
-      </Detail>
-    )}
-    {open && (
-      <Detail>
-        <Anchor icon={<Clock size="small" />} label={`${open} - ${close}`} />
-      </Detail>
-    )}
-    {eventStarts && (
-      <Detail>
-        <Anchor
-          icon={<Clock size="small" />}
-          label={`${eventStarts} - ${eventEnds}`}
-        />
-      </Detail>
-    )}
-    {caveats && (
-      <Detail>
-        <Anchor icon={<Calendar size="small" />} label={caveats} />
-      </Detail>
-    )}
-    {price && (
-      <Detail>
-        <Anchor icon={<Currency size="small" />} label={price} />{" "}
-      </Detail>
-    )}
-    <Box direction="row" wrap>
-      {tickets && (
+  <Box direction="row" justify="between">
+    <Box>
+      {type && (
         <Detail>
-          <Anchor icon={<Ticket size="small" />} />
+          <Anchor
+            icon={<Organization size="small" color="dark-5" />}
+            label={type}
+            onClick={() => navigate(`/business/${kebabCase(type)}`)}
+          />
         </Detail>
       )}
-      {facebook && (
+      {neighborhood && (
         <Detail>
-          <Anchor icon={<Facebook size="small" />} href={facebook} />
+          <Anchor
+            icon={<Location size="small" color="dark-5" />}
+            label={neighborhood}
+            onClick={() => navigate(`/${kebabCase(neighborhood)}`)}
+          />
         </Detail>
       )}
-      {instagram && (
+      {open && (
         <Detail>
-          <Anchor icon={<Instagram size="small" />} href={instagram} />
+          <Anchor
+            icon={<Clock size="small" color="dark-5" />}
+            label={`${open} - ${close}`}
+          />
         </Detail>
       )}
-      {website && (
+      {eventStarts && (
         <Detail>
-          <Anchor icon={<Domain size="small" />} href={website} />
+          <Anchor
+            icon={<Clock size="small" color="dark-5" />}
+            label={`${eventStarts} - ${eventEnds}`}
+          />
+        </Detail>
+      )}
+      {caveats && (
+        <Detail>
+          <Anchor
+            icon={<Calendar size="small" color="dark-5" />}
+            label={caveats}
+          />
+        </Detail>
+      )}
+      {price && (
+        <Detail>
+          <Anchor
+            icon={<Currency size="small" color="dark-5" />}
+            label={price}
+          />
         </Detail>
       )}
       {phone && (
         <Detail>
-          <Anchor icon={<Phone size="small" />} label={phone} />
+          <Anchor icon={<Phone size="small" color="dark-5" />} label={phone} />
+        </Detail>
+      )}
+    </Box>
+    <Box>
+      {tickets && (
+        <Detail>
+          <Button
+            icon={<Ticket size="small" color="black" />}
+            href={tickets}
+            plain={true}
+          />
+        </Detail>
+      )}
+      {facebook && (
+        <Detail>
+          <Button
+            icon={<Facebook size="small" color="black" />}
+            href={facebook}
+            plain={true}
+          />
+        </Detail>
+      )}
+      {instagram && (
+        <Detail>
+          <Button
+            icon={<Instagram size="small" color="black" />}
+            href={instagram}
+            plain={true}
+          />
+        </Detail>
+      )}
+      {website && (
+        <Detail>
+          <Button
+            icon={<Domain size="small" color="black" />}
+            href={website}
+            plain={true}
+          />
         </Detail>
       )}
     </Box>

@@ -2,8 +2,8 @@ import React from "react"
 import { Heading, Box, Text } from "grommet"
 
 import Carousel from "../components/Carousel"
-import AddEvent from "../containers/AddEvent"
 import Details from "./Details"
+import ToggleEventButton from "../components/ToggleEventButton"
 
 const Event = props => {
   const {
@@ -32,13 +32,8 @@ const Event = props => {
   } = props
 
   return (
-    <Box background="light-2" margin={{ vertical: "large" }}>
-      <Heading level="3" margin="medium">
-        {eventName}
-      </Heading>
-      <Heading level="3" margin="medium">
-        {description}
-      </Heading>
+    <Box margin={{ vertical: "large" }}>
+      <Heading level="2">{eventName}</Heading>
       <Carousel images={carouselImages} />
       <Details
         eventStarts={eventStarts}
@@ -53,11 +48,11 @@ const Event = props => {
         place={placeName}
         neighborhood={neighborhood}
       />
-      <AddEvent eventId={id} />
+      <ToggleEventButton eventId={id} name={eventName} />
       <Text
-        margin="medium"
         size="14px"
         dangerouslySetInnerHTML={{ __html: html }}
+        margin={{ vertical: "medium" }}
       />
     </Box>
   )

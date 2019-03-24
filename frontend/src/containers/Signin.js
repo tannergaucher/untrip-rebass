@@ -16,7 +16,7 @@ const SIGNIN_MUTATION = gql`
         name
         email
         events {
-          postId
+          eventId
         }
       }
     }

@@ -47,7 +47,6 @@ function Menu() {
                 onEsc={handleClose}
                 modal
                 position="right"
-                animate="true"
                 full="vertical"
                 responsive={true}
                 style={{ borderRadius: "0" }}
@@ -64,8 +63,12 @@ function Menu() {
                   height="100vh"
                 >
                   <Box margin="medium">
-                    <Heading margin="none">Untrip</Heading>
-                    <Heading level="6" margin="none">
+                    <Link to="/">
+                      <Heading margin="none" color="black">
+                        Untrip
+                      </Heading>
+                    </Link>
+                    <Heading level="6" margin="none" color="light-6">
                       Your Inside Guide To KL
                     </Heading>
                   </Box>
@@ -75,7 +78,7 @@ function Menu() {
                       return (
                         <AccordionPanel
                           label={
-                            <Heading margin="medium" level="3">
+                            <Heading margin="medium" level="3" color="black">
                               {category}
                             </Heading>
                           }
@@ -105,7 +108,13 @@ function Menu() {
                   </Accordion>
                   <Box align="end" alignSelf="end" pad="medium">
                     <Heading level="4" margin="xsmall">
-                      <Link to="/me">My Untrip</Link>
+                      <Link to="/my-events">Events</Link>
+                    </Heading>
+                    <Heading level="4" margin="xsmall">
+                      <Link to="/my-lists">Lists</Link>
+                    </Heading>
+                    <Heading level="4" margin="xsmall">
+                      <Link to="/profile">My Untrip</Link>
                     </Heading>
                     <Heading level="4" margin="xsmall">
                       <Link to="/signin"> Sign In </Link>

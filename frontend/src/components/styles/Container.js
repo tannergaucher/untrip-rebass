@@ -1,5 +1,5 @@
 import React from "react"
-import { Box } from "Grommet"
+import { Box } from "grommet"
 
 const Container = props => (
   <Box fill="horizontal" style={{ maxWidth: "750px" }} {...props} />

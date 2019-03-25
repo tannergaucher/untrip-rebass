@@ -23,17 +23,8 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
-        subcategories: allContentfulSubcategory {
-          edges {
-            node {
-              subcategory
-              post_ {
-                category {
-                  category
-                }
-              }
-            }
-          }
+        tags: allContentfulTag {
+          distinct(field: tag)
         }
         places: allContentfulPlace {
           edges {
@@ -55,7 +46,7 @@ exports.createPages = ({ graphql, actions }) => {
         const { data } = result
         const posts = data.posts.edges
         const categories = data.categories.edges
-        const subcategories = data.subcategories.edges
+        const tags = data.tags.distinct
         const places = data.places.edges
         const events = data.events.edges
 
@@ -84,16 +75,12 @@ exports.createPages = ({ graphql, actions }) => {
           })
         })
 
-        subcategories.map(edge => {
-          const { subcategory } = edge.node
-          const { category } = edge.node.post_[0].category
-
+        tags.map(tag => {
           createPage({
-            path: `/${_.kebabCase(category)}/${_.kebabCase(subcategory)}`,
-            component: path.resolve(`./src/templates/subcategory.js`),
+            path: `/tags/${_.kebabCase(tag)}`,
+            component: path.resolve(`./src/templates/tag.js`),
             context: {
-              category,
-              subcategory,
+              tag,
             },
           })
         })

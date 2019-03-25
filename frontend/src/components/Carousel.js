@@ -13,7 +13,7 @@ const Image = styled(Img)`
 
 const MyCarousel = ({ images }) => {
   return (
-    <Carousel a11yTitl="image carousel" play={6000}>
+    <Carousel a11yTitl="image carousel">
       {images.map(image => {
         const {
           credit,

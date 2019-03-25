@@ -26,8 +26,8 @@ function Menu() {
                 category
                 post_ {
                   id
-                  subcategory {
-                    subcategory
+                  tags {
+                    tag
                   }
                 }
               }
@@ -86,16 +86,14 @@ function Menu() {
                             <Link to={kebabCase(category)}>All</Link>
                           </Heading>
                           {post_.map(post => {
-                            const { subcategory, id } = post
-                            return subcategory.map(node => (
+                            const { tags, id } = post
+                            return tags.map(post => (
                               <Link
-                                to={`/${kebabCase(category)}/${kebabCase(
-                                  node.subcategory
-                                )}`}
+                                to={`/tags/${kebabCase(post.tag)}`}
                                 key={id}
                               >
                                 <Heading level="4" margin="medium">
-                                  {node.subcategory}
+                                  {post.tag}
                                 </Heading>
                               </Link>
                             ))

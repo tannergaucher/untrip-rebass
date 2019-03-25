@@ -40,9 +40,7 @@ const Layout = ({ children }) => (
         <>
           <GlobalStyles />
           <Header title={data.site.siteMetadata.title} />
-          <Box align="center" as="main">
-            {children}
-          </Box>
+          <Box as="main">{children}</Box>
         </>
       </Grommet>
     )}

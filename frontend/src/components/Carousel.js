@@ -26,7 +26,7 @@ const MyCarousel = ({ images }) => {
           <Box style={{ position: "relative" }}>
             <Image fluid={fluid} />
             <Box
-              style={{ position: "absolute", top: 15, left: 15 }}
+              style={{ position: "absolute", bottom: "10%", left: 15 }}
               background="black"
               color="white"
               pad="xsmall"

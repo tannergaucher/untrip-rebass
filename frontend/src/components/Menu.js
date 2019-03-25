@@ -56,12 +56,7 @@ function Menu() {
                   icon={<Close />}
                   alignSelf="end"
                 />
-                <Box
-                  pad="medium"
-                  align="center"
-                  justify="between"
-                  height="100vh"
-                >
+                <Box pad="medium" align="center" height="100vh">
                   <Box margin="medium">
                     <Link to="/">
                       <Heading margin="none" color="black">
@@ -72,7 +67,10 @@ function Menu() {
                       Your Inside Guide To KL
                     </Heading>
                   </Box>
-                  <Accordion margin={{ vertical: "medium" }}>
+                  <Accordion
+                    margin={{ vertical: "medium" }}
+                    alignSelf="stretch"
+                  >
                     {edges.map(edge => {
                       const { category, post_ } = edge.node
                       return (
@@ -108,10 +106,10 @@ function Menu() {
                   </Accordion>
                   <Box align="end" alignSelf="end" pad="medium">
                     <Heading level="4" margin="xsmall">
-                      <Link to="/my-events">Events</Link>
+                      <Link to="/my-lists">Lists</Link>
                     </Heading>
                     <Heading level="4" margin="xsmall">
-                      <Link to="/my-lists">Lists</Link>
+                      <Link to="/my-events">Events</Link>
                     </Heading>
                     <Heading level="4" margin="xsmall">
                       <Link to="/profile">My Untrip</Link>

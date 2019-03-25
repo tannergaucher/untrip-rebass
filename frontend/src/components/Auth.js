@@ -1,12 +1,11 @@
 import React from "react"
-import { Tabs, Tab } from "grommet"
+import { Box, Tabs, Tab } from "grommet"
 
-import Container from "../components/styles/Container"
 import Signin from "../containers/Signin"
 import Signup from "../containers/Signup"
 
 const Auth = () => (
-  <Container>
+  <Box alignSelf="center">
     <Tabs>
       <Tab title="Sign In">
         <Signin />
@@ -15,7 +14,7 @@ const Auth = () => (
         <Signup />
       </Tab>
     </Tabs>
-  </Container>
+  </Box>
 )
 
 export default Auth

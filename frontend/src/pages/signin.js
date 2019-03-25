@@ -1,14 +1,14 @@
 import React from "react"
+import { Box } from "grommet"
 
 import Layout from "../components/layout"
-import Container from "../components/styles/Container"
 import Auth from "../components/Auth"
 
 const signin = () => (
   <Layout>
-    <Container>
+    <Box style={{ height: "calc(100vh - 200px)" }} justify="center">
       <Auth />
-    </Container>
+    </Box>
   </Layout>
 )
 

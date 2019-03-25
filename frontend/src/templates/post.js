@@ -30,7 +30,7 @@ const Post = ({ data }) => {
   return (
     <Layout>
       <Container>
-        <Heading level="1" margin={{ vertical: "large" }}>
+        <Heading level={1} margin={{ vertical: "medium" }}>
           {title}
         </Heading>
         <Img fluid={fluid} />
@@ -39,6 +39,7 @@ const Post = ({ data }) => {
           {childContentfulPostArticlePreTextNode && (
             <Text
               margin={{ vertical: "medium" }}
+              size="medium"
               dangerouslySetInnerHTML={{
                 __html:
                   childContentfulPostArticlePreTextNode.childMarkdownRemark

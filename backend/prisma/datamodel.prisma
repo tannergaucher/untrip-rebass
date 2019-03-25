@@ -1,13 +1,26 @@
-type Event {
-  id: ID! @unique
-  eventId: String!
-  user: User!
-}
-
 type User {
   id: ID! @unique
   email: String! @unique
   password: String!
   name: String
   events: [Event!]!
+  lists: [List!]!
+}
+
+type Event {
+  id: ID! @unique
+  eventId: String!
+  user: User!
+}
+
+type List {
+  id: ID! @unique
+  title: String!
+  user: User!
+  places: [Place]
+}
+
+type Place {
+  id: ID! @unique
+  placeId: String!
 }

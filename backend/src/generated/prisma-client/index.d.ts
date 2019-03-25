@@ -15,6 +15,8 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 
 export interface Exists {
   event: (where?: EventWhereInput) => Promise<boolean>;
+  list: (where?: ListWhereInput) => Promise<boolean>;
+  place: (where?: PlaceWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -60,6 +62,52 @@ export interface Prisma {
       last?: Int;
     }
   ) => EventConnectionPromise;
+  list: (where: ListWhereUniqueInput) => ListPromise;
+  lists: (
+    args?: {
+      where?: ListWhereInput;
+      orderBy?: ListOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<List>;
+  listsConnection: (
+    args?: {
+      where?: ListWhereInput;
+      orderBy?: ListOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => ListConnectionPromise;
+  place: (where: PlaceWhereUniqueInput) => PlacePromise;
+  places: (
+    args?: {
+      where?: PlaceWhereInput;
+      orderBy?: PlaceOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<Place>;
+  placesConnection: (
+    args?: {
+      where?: PlaceWhereInput;
+      orderBy?: PlaceOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => PlaceConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
   users: (
     args?: {
@@ -105,6 +153,38 @@ export interface Prisma {
   ) => EventPromise;
   deleteEvent: (where: EventWhereUniqueInput) => EventPromise;
   deleteManyEvents: (where?: EventWhereInput) => BatchPayloadPromise;
+  createList: (data: ListCreateInput) => ListPromise;
+  updateList: (
+    args: { data: ListUpdateInput; where: ListWhereUniqueInput }
+  ) => ListPromise;
+  updateManyLists: (
+    args: { data: ListUpdateManyMutationInput; where?: ListWhereInput }
+  ) => BatchPayloadPromise;
+  upsertList: (
+    args: {
+      where: ListWhereUniqueInput;
+      create: ListCreateInput;
+      update: ListUpdateInput;
+    }
+  ) => ListPromise;
+  deleteList: (where: ListWhereUniqueInput) => ListPromise;
+  deleteManyLists: (where?: ListWhereInput) => BatchPayloadPromise;
+  createPlace: (data: PlaceCreateInput) => PlacePromise;
+  updatePlace: (
+    args: { data: PlaceUpdateInput; where: PlaceWhereUniqueInput }
+  ) => PlacePromise;
+  updateManyPlaces: (
+    args: { data: PlaceUpdateManyMutationInput; where?: PlaceWhereInput }
+  ) => BatchPayloadPromise;
+  upsertPlace: (
+    args: {
+      where: PlaceWhereUniqueInput;
+      create: PlaceCreateInput;
+      update: PlaceUpdateInput;
+    }
+  ) => PlacePromise;
+  deletePlace: (where: PlaceWhereUniqueInput) => PlacePromise;
+  deleteManyPlaces: (where?: PlaceWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (
     args: { data: UserUpdateInput; where: UserWhereUniqueInput }
@@ -133,6 +213,12 @@ export interface Subscription {
   event: (
     where?: EventSubscriptionWhereInput
   ) => EventSubscriptionPayloadSubscription;
+  list: (
+    where?: ListSubscriptionWhereInput
+  ) => ListSubscriptionPayloadSubscription;
+  place: (
+    where?: PlaceSubscriptionWhereInput
+  ) => PlaceSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -151,6 +237,26 @@ export type EventOrderByInput =
   | "id_DESC"
   | "eventId_ASC"
   | "eventId_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ListOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type PlaceOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "placeId_ASC"
+  | "placeId_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -271,10 +377,93 @@ export interface UserWhereInput {
   events_every?: EventWhereInput;
   events_some?: EventWhereInput;
   events_none?: EventWhereInput;
+  lists_every?: ListWhereInput;
+  lists_some?: ListWhereInput;
+  lists_none?: ListWhereInput;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
 }
+
+export interface ListWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  user?: UserWhereInput;
+  places_every?: PlaceWhereInput;
+  places_some?: PlaceWhereInput;
+  places_none?: PlaceWhereInput;
+  AND?: ListWhereInput[] | ListWhereInput;
+  OR?: ListWhereInput[] | ListWhereInput;
+  NOT?: ListWhereInput[] | ListWhereInput;
+}
+
+export interface PlaceWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  placeId?: String;
+  placeId_not?: String;
+  placeId_in?: String[] | String;
+  placeId_not_in?: String[] | String;
+  placeId_lt?: String;
+  placeId_lte?: String;
+  placeId_gt?: String;
+  placeId_gte?: String;
+  placeId_contains?: String;
+  placeId_not_contains?: String;
+  placeId_starts_with?: String;
+  placeId_not_starts_with?: String;
+  placeId_ends_with?: String;
+  placeId_not_ends_with?: String;
+  AND?: PlaceWhereInput[] | PlaceWhereInput;
+  OR?: PlaceWhereInput[] | PlaceWhereInput;
+  NOT?: PlaceWhereInput[] | PlaceWhereInput;
+}
+
+export type ListWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export type PlaceWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
@@ -295,6 +484,26 @@ export interface UserCreateWithoutEventsInput {
   email: String;
   password: String;
   name?: String;
+  lists?: ListCreateManyWithoutUserInput;
+}
+
+export interface ListCreateManyWithoutUserInput {
+  create?: ListCreateWithoutUserInput[] | ListCreateWithoutUserInput;
+  connect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+}
+
+export interface ListCreateWithoutUserInput {
+  title: String;
+  places?: PlaceCreateManyInput;
+}
+
+export interface PlaceCreateManyInput {
+  create?: PlaceCreateInput[] | PlaceCreateInput;
+  connect?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
+}
+
+export interface PlaceCreateInput {
+  placeId: String;
 }
 
 export interface EventUpdateInput {
@@ -313,6 +522,160 @@ export interface UserUpdateWithoutEventsDataInput {
   email?: String;
   password?: String;
   name?: String;
+  lists?: ListUpdateManyWithoutUserInput;
+}
+
+export interface ListUpdateManyWithoutUserInput {
+  create?: ListCreateWithoutUserInput[] | ListCreateWithoutUserInput;
+  delete?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  connect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  set?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  disconnect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  update?:
+    | ListUpdateWithWhereUniqueWithoutUserInput[]
+    | ListUpdateWithWhereUniqueWithoutUserInput;
+  upsert?:
+    | ListUpsertWithWhereUniqueWithoutUserInput[]
+    | ListUpsertWithWhereUniqueWithoutUserInput;
+  deleteMany?: ListScalarWhereInput[] | ListScalarWhereInput;
+  updateMany?:
+    | ListUpdateManyWithWhereNestedInput[]
+    | ListUpdateManyWithWhereNestedInput;
+}
+
+export interface ListUpdateWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput;
+  data: ListUpdateWithoutUserDataInput;
+}
+
+export interface ListUpdateWithoutUserDataInput {
+  title?: String;
+  places?: PlaceUpdateManyInput;
+}
+
+export interface PlaceUpdateManyInput {
+  create?: PlaceCreateInput[] | PlaceCreateInput;
+  update?:
+    | PlaceUpdateWithWhereUniqueNestedInput[]
+    | PlaceUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | PlaceUpsertWithWhereUniqueNestedInput[]
+    | PlaceUpsertWithWhereUniqueNestedInput;
+  delete?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
+  connect?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
+  set?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
+  disconnect?: PlaceWhereUniqueInput[] | PlaceWhereUniqueInput;
+  deleteMany?: PlaceScalarWhereInput[] | PlaceScalarWhereInput;
+  updateMany?:
+    | PlaceUpdateManyWithWhereNestedInput[]
+    | PlaceUpdateManyWithWhereNestedInput;
+}
+
+export interface PlaceUpdateWithWhereUniqueNestedInput {
+  where: PlaceWhereUniqueInput;
+  data: PlaceUpdateDataInput;
+}
+
+export interface PlaceUpdateDataInput {
+  placeId?: String;
+}
+
+export interface PlaceUpsertWithWhereUniqueNestedInput {
+  where: PlaceWhereUniqueInput;
+  update: PlaceUpdateDataInput;
+  create: PlaceCreateInput;
+}
+
+export interface PlaceScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  placeId?: String;
+  placeId_not?: String;
+  placeId_in?: String[] | String;
+  placeId_not_in?: String[] | String;
+  placeId_lt?: String;
+  placeId_lte?: String;
+  placeId_gt?: String;
+  placeId_gte?: String;
+  placeId_contains?: String;
+  placeId_not_contains?: String;
+  placeId_starts_with?: String;
+  placeId_not_starts_with?: String;
+  placeId_ends_with?: String;
+  placeId_not_ends_with?: String;
+  AND?: PlaceScalarWhereInput[] | PlaceScalarWhereInput;
+  OR?: PlaceScalarWhereInput[] | PlaceScalarWhereInput;
+  NOT?: PlaceScalarWhereInput[] | PlaceScalarWhereInput;
+}
+
+export interface PlaceUpdateManyWithWhereNestedInput {
+  where: PlaceScalarWhereInput;
+  data: PlaceUpdateManyDataInput;
+}
+
+export interface PlaceUpdateManyDataInput {
+  placeId?: String;
+}
+
+export interface ListUpsertWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput;
+  update: ListUpdateWithoutUserDataInput;
+  create: ListCreateWithoutUserInput;
+}
+
+export interface ListScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  AND?: ListScalarWhereInput[] | ListScalarWhereInput;
+  OR?: ListScalarWhereInput[] | ListScalarWhereInput;
+  NOT?: ListScalarWhereInput[] | ListScalarWhereInput;
+}
+
+export interface ListUpdateManyWithWhereNestedInput {
+  where: ListScalarWhereInput;
+  data: ListUpdateManyDataInput;
+}
+
+export interface ListUpdateManyDataInput {
+  title?: String;
 }
 
 export interface UserUpsertWithoutEventsInput {
@@ -324,7 +687,18 @@ export interface EventUpdateManyMutationInput {
   eventId?: String;
 }
 
-export interface UserCreateInput {
+export interface ListCreateInput {
+  title: String;
+  user: UserCreateOneWithoutListsInput;
+  places?: PlaceCreateManyInput;
+}
+
+export interface UserCreateOneWithoutListsInput {
+  create?: UserCreateWithoutListsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateWithoutListsInput {
   email: String;
   password: String;
   name?: String;
@@ -340,7 +714,20 @@ export interface EventCreateWithoutUserInput {
   eventId: String;
 }
 
-export interface UserUpdateInput {
+export interface ListUpdateInput {
+  title?: String;
+  user?: UserUpdateOneRequiredWithoutListsInput;
+  places?: PlaceUpdateManyInput;
+}
+
+export interface UserUpdateOneRequiredWithoutListsInput {
+  create?: UserCreateWithoutListsInput;
+  update?: UserUpdateWithoutListsDataInput;
+  upsert?: UserUpsertWithoutListsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateWithoutListsDataInput {
   email?: String;
   password?: String;
   name?: String;
@@ -423,6 +810,39 @@ export interface EventUpdateManyDataInput {
   eventId?: String;
 }
 
+export interface UserUpsertWithoutListsInput {
+  update: UserUpdateWithoutListsDataInput;
+  create: UserCreateWithoutListsInput;
+}
+
+export interface ListUpdateManyMutationInput {
+  title?: String;
+}
+
+export interface PlaceUpdateInput {
+  placeId?: String;
+}
+
+export interface PlaceUpdateManyMutationInput {
+  placeId?: String;
+}
+
+export interface UserCreateInput {
+  email: String;
+  password: String;
+  name?: String;
+  events?: EventCreateManyWithoutUserInput;
+  lists?: ListCreateManyWithoutUserInput;
+}
+
+export interface UserUpdateInput {
+  email?: String;
+  password?: String;
+  name?: String;
+  events?: EventUpdateManyWithoutUserInput;
+  lists?: ListUpdateManyWithoutUserInput;
+}
+
 export interface UserUpdateManyMutationInput {
   email?: String;
   password?: String;
@@ -438,6 +858,28 @@ export interface EventSubscriptionWhereInput {
   AND?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput;
   OR?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput;
   NOT?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput;
+}
+
+export interface ListSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ListWhereInput;
+  AND?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput;
+  OR?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput;
+  NOT?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput;
+}
+
+export interface PlaceSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: PlaceWhereInput;
+  AND?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput;
+  OR?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput;
+  NOT?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -497,6 +939,17 @@ export interface UserPromise extends Promise<User>, Fragmentable {
       last?: Int;
     }
   ) => T;
+  lists: <T = FragmentableArray<List>>(
+    args?: {
+      where?: ListWhereInput;
+      orderBy?: ListOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
 export interface UserSubscription
@@ -517,6 +970,75 @@ export interface UserSubscription
       last?: Int;
     }
   ) => T;
+  lists: <T = Promise<AsyncIterator<ListSubscription>>>(
+    args?: {
+      where?: ListWhereInput;
+      orderBy?: ListOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface List {
+  id: ID_Output;
+  title: String;
+}
+
+export interface ListPromise extends Promise<List>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  user: <T = UserPromise>() => T;
+  places: <T = FragmentableArray<Place>>(
+    args?: {
+      where?: PlaceWhereInput;
+      orderBy?: PlaceOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface ListSubscription
+  extends Promise<AsyncIterator<List>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  user: <T = UserSubscription>() => T;
+  places: <T = Promise<AsyncIterator<PlaceSubscription>>>(
+    args?: {
+      where?: PlaceWhereInput;
+      orderBy?: PlaceOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface Place {
+  id: ID_Output;
+  placeId: String;
+}
+
+export interface PlacePromise extends Promise<Place>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  placeId: () => Promise<String>;
+}
+
+export interface PlaceSubscription
+  extends Promise<AsyncIterator<Place>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  placeId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface EventConnection {
@@ -592,6 +1114,114 @@ export interface AggregateEventPromise
 
 export interface AggregateEventSubscription
   extends Promise<AsyncIterator<AggregateEvent>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ListConnection {
+  pageInfo: PageInfo;
+  edges: ListEdge[];
+}
+
+export interface ListConnectionPromise
+  extends Promise<ListConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ListEdge>>() => T;
+  aggregate: <T = AggregateListPromise>() => T;
+}
+
+export interface ListConnectionSubscription
+  extends Promise<AsyncIterator<ListConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ListEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateListSubscription>() => T;
+}
+
+export interface ListEdge {
+  node: List;
+  cursor: String;
+}
+
+export interface ListEdgePromise extends Promise<ListEdge>, Fragmentable {
+  node: <T = ListPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ListEdgeSubscription
+  extends Promise<AsyncIterator<ListEdge>>,
+    Fragmentable {
+  node: <T = ListSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateList {
+  count: Int;
+}
+
+export interface AggregateListPromise
+  extends Promise<AggregateList>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateListSubscription
+  extends Promise<AsyncIterator<AggregateList>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PlaceConnection {
+  pageInfo: PageInfo;
+  edges: PlaceEdge[];
+}
+
+export interface PlaceConnectionPromise
+  extends Promise<PlaceConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PlaceEdge>>() => T;
+  aggregate: <T = AggregatePlacePromise>() => T;
+}
+
+export interface PlaceConnectionSubscription
+  extends Promise<AsyncIterator<PlaceConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PlaceEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePlaceSubscription>() => T;
+}
+
+export interface PlaceEdge {
+  node: Place;
+  cursor: String;
+}
+
+export interface PlaceEdgePromise extends Promise<PlaceEdge>, Fragmentable {
+  node: <T = PlacePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PlaceEdgeSubscription
+  extends Promise<AsyncIterator<PlaceEdge>>,
+    Fragmentable {
+  node: <T = PlaceSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregatePlace {
+  count: Int;
+}
+
+export interface AggregatePlacePromise
+  extends Promise<AggregatePlace>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePlaceSubscription
+  extends Promise<AsyncIterator<AggregatePlace>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -710,6 +1340,94 @@ export interface EventPreviousValuesSubscription
   eventId: () => Promise<AsyncIterator<String>>;
 }
 
+export interface ListSubscriptionPayload {
+  mutation: MutationType;
+  node: List;
+  updatedFields: String[];
+  previousValues: ListPreviousValues;
+}
+
+export interface ListSubscriptionPayloadPromise
+  extends Promise<ListSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ListPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ListPreviousValuesPromise>() => T;
+}
+
+export interface ListSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ListSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ListSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ListPreviousValuesSubscription>() => T;
+}
+
+export interface ListPreviousValues {
+  id: ID_Output;
+  title: String;
+}
+
+export interface ListPreviousValuesPromise
+  extends Promise<ListPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+}
+
+export interface ListPreviousValuesSubscription
+  extends Promise<AsyncIterator<ListPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PlaceSubscriptionPayload {
+  mutation: MutationType;
+  node: Place;
+  updatedFields: String[];
+  previousValues: PlacePreviousValues;
+}
+
+export interface PlaceSubscriptionPayloadPromise
+  extends Promise<PlaceSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PlacePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PlacePreviousValuesPromise>() => T;
+}
+
+export interface PlaceSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PlaceSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PlaceSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PlacePreviousValuesSubscription>() => T;
+}
+
+export interface PlacePreviousValues {
+  id: ID_Output;
+  placeId: String;
+}
+
+export interface PlacePreviousValuesPromise
+  extends Promise<PlacePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  placeId: () => Promise<String>;
+}
+
+export interface PlacePreviousValuesSubscription
+  extends Promise<AsyncIterator<PlacePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  placeId: () => Promise<AsyncIterator<String>>;
+}
+
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -789,11 +1507,19 @@ export type Long = string;
 
 export const models: Model[] = [
   {
+    name: "User",
+    embedded: false
+  },
+  {
     name: "Event",
     embedded: false
   },
   {
-    name: "User",
+    name: "List",
+    embedded: false
+  },
+  {
+    name: "Place",
     embedded: false
   }
 ];

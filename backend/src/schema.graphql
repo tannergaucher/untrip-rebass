@@ -9,19 +9,6 @@ type Query {
   events: [Event!]!
 }
 
-type Mutation {
-  signup(email: String!, password: String!, name: String): AuthPayload!
-  signin(email: String!, password: String!): AuthPayload!
-  signout: SuccessMessage
-  addEvent(eventId: String!): Event
-  removeEvent(eventId: String!): Event
-}
-
-type AuthPayload {
-  token: String!
-  user: User!
-}
-
 type Event {
   eventId: String!
   users: [User!]
@@ -33,4 +20,32 @@ type User {
   password: String!
   name: String
   events: [Event!]
+  lists: [List!]!
+}
+
+type Place {
+  id: ID!
+  placeId: String!
+}
+
+type List {
+  id: ID!
+  title: String!
+  user: User!
+  places: [Place]!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String): AuthPayload!
+  signin(email: String!, password: String!): AuthPayload!
+  signout: SuccessMessage
+  addEvent(eventId: String!): Event
+  removeEvent(eventId: String!): Event
+  createList(title: String!, placeId: String): List!
+  deleteList(id: ID): List
 }

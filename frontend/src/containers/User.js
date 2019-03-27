@@ -12,6 +12,10 @@ const CURRENT_USER_QUERY = gql`
       events {
         eventId
       }
+      lists {
+        id
+        title
+      }
     }
   }
 `

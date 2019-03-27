@@ -9,6 +9,11 @@ import User from "../containers/User"
 import PleaseSignin from "../containers/PleaseSignin"
 import Container from "../components/styles/Container"
 
+//1. query the users lists
+//2. map lists to select
+//3. map list places to draggable list items
+//todo: save the list items index to db, to persist list item order
+
 const fakePlaces = [
   {
     name: "VCR",
@@ -64,7 +69,7 @@ const getListStyle = isDraggingOver => ({
 })
 
 function myEvents({ data }) {
-  const [value, setValue] = useState("Best Work Cafes")
+  const [value, setValue] = useState("")
   const [places, setPlaces] = useState(fakePlaces)
 
   const onDragEnd = result => {
@@ -87,6 +92,7 @@ function myEvents({ data }) {
             {({ data, loading, error }) => {
               if (loading) return <p>loading..</p>
               if (error) return <p>{error.message}</p>
+              if (!data.me) return <p>no datame</p>
 
               return (
                 <Container>
@@ -94,16 +100,13 @@ function myEvents({ data }) {
                     My Lists
                   </Heading>
                   <Select
-                    options={[
-                      "Best Work Cafes",
-                      "The trail of splendid nadsi lemak",
-                      "Best breakfast sets for under 7RM",
-                    ]}
+                    options={data.me.lists.map(list => (
+                      <Heading level="3">{list.title}</Heading>
+                    ))}
                     value={value}
                     onChange={({ option }) => setValue(option)}
                     margin={{ vertical: "medium" }}
                   />
-                  <Share />
                   <Droppable droppableId="droppable">
                     {(provided, snapshot) => (
                       <div

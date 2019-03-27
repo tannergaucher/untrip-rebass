@@ -84,7 +84,7 @@ function Menu() {
                   alignSelf="end"
                 />
                 <Box pad="medium" align="center">
-                  <Box margin="medium">
+                  {/* <Box margin="medium">
                     <Link to="/">
                       <Heading margin="none" color="black">
                         Untrip
@@ -93,7 +93,7 @@ function Menu() {
                     <Heading level="6" margin="none" color="light-6">
                       Your Inside Guide To KL
                     </Heading>
-                  </Box>
+                  </Box> */}
                   <Accordion
                     margin={{ vertical: "medium" }}
                     alignSelf="stretch"

@@ -1,6 +1,6 @@
 const List = {
-  places: ({ listId }, args, context) => {
-    return context.prisma.list({ listId }).places()
+  places: ({ id }, args, context) => {
+    return context.prisma.list({ id }).places()
   },
 }
 

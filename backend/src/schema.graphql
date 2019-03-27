@@ -6,7 +6,6 @@ type SuccessMessage {
 
 type Query {
   me: User
-  events: [Event!]!
 }
 
 type Event {
@@ -26,13 +25,14 @@ type User {
 type Place {
   id: ID!
   placeId: String!
+  list: List!
 }
 
 type List {
   id: ID!
   title: String!
   user: User!
-  places: [Place]!
+  places: [Place]
 }
 
 type AuthPayload {
@@ -47,5 +47,4 @@ type Mutation {
   addEvent(eventId: String!): Event
   removeEvent(eventId: String!): Event
   createList(title: String!, placeId: String!): List!
-  deleteList(id: ID): List
 }

@@ -23,4 +23,5 @@ type List {
 type Place {
   id: ID! @unique
   placeId: String!
+  list: List!
 }

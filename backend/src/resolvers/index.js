@@ -3,6 +3,7 @@ const { Mutation } = require('./Mutation')
 const { User } = require('./User')
 const { Event } = require('./Event')
 const { List } = require('./List')
+const { Place } = require('./Place')
 
 const resolvers = {
   Query,
@@ -10,6 +11,7 @@ const resolvers = {
   User,
   Event,
   List,
+  Place,
 }
 
 module.exports = {

@@ -9,15 +9,14 @@ import Place from "../components/Place"
 import Avatar from "../components/Avatar"
 import Share from "../components/Share"
 
-const Post = ({ data }) => {
+function Post({ data }) {
   const {
-    id,
     title,
     published,
     author: {
       name,
       socialLink,
-      avatarImage: { fluid: avatarFluid },
+      avatarImage: { fixed: avatarFixed },
     },
     cardImage: { fluid },
     childContentfulPostArticlePreTextNode,
@@ -85,7 +84,7 @@ const Post = ({ data }) => {
         <Avatar
           name={name}
           published={published}
-          fluid={avatarFluid}
+          fixed={avatarFixed}
           social={socialLink}
         />
       </Container>
@@ -105,8 +104,8 @@ export const postPageQuery = graphql`
         name
         socialLink
         avatarImage {
-          fluid {
-            ...GatsbyContentfulFluid
+          fixed(height: 50, width: 50) {
+            ...GatsbyContentfulFixed
           }
         }
       }

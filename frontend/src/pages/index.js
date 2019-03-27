@@ -14,24 +14,11 @@ const IndexPage = ({ data }) => {
       <Container>
         <section>
           {latest.map(edge => {
-            const {
-              title,
-              introSentence,
-              slug,
-              id,
-              published,
-              carouselImages,
-              postPlace: { neighborhood },
-              category: { category },
-            } = edge.node
+            const { title, slug, id, carouselImages } = edge.node
 
             return (
               <Card
                 title={title}
-                intro={introSentence}
-                category={category}
-                date={published}
-                neighborhood={neighborhood}
                 carouselImages={carouselImages}
                 slug={slug}
                 id={id}

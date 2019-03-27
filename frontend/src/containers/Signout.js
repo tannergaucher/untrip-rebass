@@ -18,12 +18,9 @@ const Signout = () => {
     <Mutation
       mutation={SIGN_OUT_MUTATION}
       refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-      // update={() => {
-      //   client.resetStore()
-      // }}
     >
       {signout => {
-        return <Button onClick={signout} label="Sign Out" />
+        return <Button onClick={signout} label="Sign Out" plain={true} />
       }}
     </Mutation>
   )

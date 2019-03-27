@@ -6,7 +6,7 @@ import Auth from "../components/Auth"
 
 const signin = () => (
   <Layout>
-    <Box style={{ height: "calc(100vh - 200px)" }} justify="center">
+    <Box>
       <Auth />
     </Box>
   </Layout>

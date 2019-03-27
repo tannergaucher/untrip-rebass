@@ -1,5 +1,5 @@
 import React from "react"
-import { Mutation } from "react-apollo"
+import { Mutation, ApolloConsumer } from "react-apollo"
 import gql from "graphql-tag"
 import { navigate } from "@reach/router"
 import { Button, Form, FormField } from "grommet"
@@ -42,41 +42,43 @@ class Signin extends React.Component {
       >
         {(signin, { loading, error }) => {
           return (
-            <Form
-              onSubmit={async e => {
-                e.preventDefault()
-                await signin()
-                navigate(`/`)
-              }}
-            >
-              <Fieldset>
-                <Error error={error} />
-                <FormField
-                  name="email"
-                  type="email"
-                  placeholder="email"
-                  autoComplete="current-password"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-
-                <FormField
-                  name="password"
-                  type="password"
-                  placeholder="password"
-                  autoComplete="current-password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
-
-                <Button
-                  type="submit"
-                  label="Sign In"
-                  disabled={loading}
-                  primary
-                />
-              </Fieldset>
-            </Form>
+            <ApolloConsumer>
+              {client => (
+                <Form
+                  onSubmit={async e => {
+                    e.preventDefault()
+                    await signin()
+                    navigate(`/`)
+                  }}
+                >
+                  <Fieldset>
+                    <Error error={error} />
+                    <FormField
+                      name="email"
+                      type="email"
+                      placeholder="email"
+                      autoComplete="current-password"
+                      value={this.state.email}
+                      onChange={this.handleChange}
+                    />
+                    <FormField
+                      name="password"
+                      type="password"
+                      placeholder="password"
+                      autoComplete="current-password"
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                    />
+                    <Button
+                      type="submit"
+                      label="Sign In"
+                      disabled={loading}
+                      primary
+                    />
+                  </Fieldset>
+                </Form>
+              )}
+            </ApolloConsumer>
           )
         }}
       </Mutation>

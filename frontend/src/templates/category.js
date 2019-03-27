@@ -65,7 +65,7 @@ const categoryPage = ({ data }) => {
             </Box>
             {post_.map(post => {
               // Todo: display only currently filtered posts
-              const { title, slug, carouselImages, tags } = post
+              const { title, slug, carouselImages } = post
               return (
                 <Card
                   title={title}

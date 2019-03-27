@@ -7,7 +7,6 @@ class MapContainer extends React.Component {
     return (
       <Map
         google={google}
-        zoom={14}
         initialCenter={{ lat, lng }}
         zoom={zoom}
         style={style}

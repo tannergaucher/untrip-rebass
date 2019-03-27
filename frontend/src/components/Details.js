@@ -1,7 +1,7 @@
 import React from "react"
 import { navigate } from "@reach/router"
 import { kebabCase } from "lodash"
-import { Box, Anchor, Button } from "grommet"
+import { Box, Anchor, Button, Heading, Text } from "grommet"
 import {
   Location,
   Clock,
@@ -15,7 +15,15 @@ import {
   Currency,
 } from "grommet-icons"
 
-import Detail from "../components/styles/Detail"
+const Detail = props => (
+  <Text
+    {...props}
+    style={{
+      fontSize: "12px",
+      textTransform: "uppercase",
+    }}
+  />
+)
 
 const Details = ({
   open,
@@ -36,9 +44,10 @@ const Details = ({
     <Box>
       {type && (
         <Detail>
-          <Anchor
+          <Button
             icon={<Organization size="small" color="dark-5" />}
             label={type}
+            plain={true}
             onClick={() => navigate(`/business/${kebabCase(type)}`)}
           />
         </Detail>

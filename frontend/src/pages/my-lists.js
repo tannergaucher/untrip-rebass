@@ -25,15 +25,20 @@ const fakePlaces = [
   {
     name: "Artisan",
     neighborhood: "Petaling Jaya",
+    userSentence: "Good Juice",
     id: 3,
   },
 ]
 
 const ListItem = ({ name, neighborhood, thumbnail, userSentence }) => (
-  <Box margin={{ vertical: "medium" }} pad="medium" background="light-3">
-    <Box direction="row" align="center" justify="between">
-      <Heading level={3}>{name}</Heading>
-      <Heading level={6}>{neighborhood}</Heading>
+  <Box margin="none" pad="medium" background="light-3">
+    <Box direction="row" justify="between">
+      <Heading level={3} margin="none">
+        {name}
+      </Heading>
+      <Heading level={6} margin="none">
+        {neighborhood}
+      </Heading>
     </Box>
     <Text size="small">{userSentence}</Text>
   </Box>
@@ -49,7 +54,6 @@ const reorder = (list, startIndex, endIndex) => {
 const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: "none",
   padding: ".5em",
-  margin: ".5em",
 
   background: isDragging ? "lightgreen" : "",
   ...draggableStyle,
@@ -86,7 +90,9 @@ function myEvents({ data }) {
 
               return (
                 <Container>
-                  <Heading margin={{ vertical: "medium" }}>My Lists</Heading>
+                  <Heading margin="medium" textAlign="center">
+                    My Lists
+                  </Heading>
                   <Select
                     options={[
                       "Best Work Cafes",
@@ -95,6 +101,7 @@ function myEvents({ data }) {
                     ]}
                     value={value}
                     onChange={({ option }) => setValue(option)}
+                    margin={{ vertical: "medium" }}
                   />
                   <Share />
                   <Droppable droppableId="droppable">

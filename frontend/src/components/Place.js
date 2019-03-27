@@ -3,12 +3,11 @@ import { Text, Heading, Box } from "grommet"
 
 import Details from "../components/Details"
 import Carousel from "../components/Carousel"
-import Add from "../components/Add"
+import AddToListModal from "../components/AddToListModal"
 
 const Place = props => {
   const {
     name,
-    description,
     openingHours,
     closingHours,
     price,
@@ -47,9 +46,8 @@ const Place = props => {
           website={website}
           facebook={facebook}
           instagram={instagram}
-          phone="555 555 5555"
         />
-        <Add name={name} />
+        <AddToListModal name={name} />
         <Text dangerouslySetInnerHTML={{ __html: html }} size="small" />
       </Box>
     </Box>

@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import {
-  Anchor,
   Form,
   FormField,
   Layer,
@@ -12,7 +11,7 @@ import {
 
 import { Close, Add as AddIcon } from "grommet-icons"
 
-function Add({ name }) {
+function AddToListModal({ name }) {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -69,4 +68,4 @@ function Add({ name }) {
   )
 }
 
-export default Add
+export default AddToListModal

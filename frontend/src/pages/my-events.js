@@ -9,6 +9,7 @@ import PleaseSignin from "../containers/PleaseSignin"
 import RemoveEvent from "../containers/RemoveEvent"
 import Container from "../components/styles/Container"
 import Link from "../components/styles/Link"
+// import Calendar from "../components/Calendar"
 
 const myEvents = ({ data }) => {
   const { edges: allEvents } = data.allContentfulEvent
@@ -21,6 +22,8 @@ const myEvents = ({ data }) => {
             if (error) return <p>{error.message}</p>
 
             const { events } = data.me
+
+            // todo: clean this up
             const going = events.map(event => {
               const goingNodes = []
               allEvents.filter(allEvent => {
@@ -30,13 +33,15 @@ const myEvents = ({ data }) => {
               })
               return goingNodes
             })
+
             return (
               <Container>
-                <Heading>My Events</Heading>
+                <Heading textAlign="center">My Events</Heading>
+                {/* <Calendar /> */}
                 {going.map(event => {
                   const { id, name } = event[0].node
                   return (
-                    <Box key={id}>
+                    <Box key={id} align="center">
                       <Link to={`/events/${kebabCase(name)}`}>
                         <Heading level="3">{name}</Heading>
                       </Link>

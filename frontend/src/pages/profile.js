@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import { ApolloConsumer } from "react-apollo"
-import { Heading } from "grommet"
+import { Heading, Box } from "grommet"
 
 import Signout from "../containers/Signout"
 import PleaseSignin from "../containers/PleaseSignin"
@@ -14,13 +14,12 @@ const profile = () => (
         {client => {
           const data = client.readQuery({ query: CURRENT_USER_QUERY })
           const { name, email } = data.me
-
           return (
-            <>
+            <Box fill="vertical" align="center" justify="center">
               <Heading level="1"> Hey, {name} 👋</Heading>
               <Heading level="5">{email}</Heading>
               <Signout />
-            </>
+            </Box>
           )
         }}
       </ApolloConsumer>

@@ -82,7 +82,6 @@ const Mutation = {
 
     return event
   },
-
   removeEvent: async (parent, { eventId }, context) => {
     const userId = getUserId(context)
 
@@ -96,9 +95,12 @@ const Mutation = {
       },
     })
 
-    return context.prisma.deleteEvent({
-      id: existingEvent.id,
-    })
+    return (
+      existingEvent &&
+      context.prisma.deleteEvent({
+        id: existingEvent.id,
+      })
+    )
   },
   createList: async (parent, { title, placeId }, context) => {
     const userId = getUserId(context)
@@ -119,20 +121,20 @@ const Mutation = {
 
     return list
   },
-  deleteList: async (parent, { listId }, context) => {
-    const userId = getUserId(context)
-    if (!userId) {
-      throw new AuthError()
-    }
+  // deleteList: async (parent, { listId }, context) => {
+  //   const userId = getUserId(context)
+  //   if (!userId) {
+  //     throw new AuthError()
+  //   }
 
-    const [existingList] = await context.prisma.user({ id: userId }).lists({
-      where: {
-        listId: listId,
-      },
-    })
+  //   const [existingList] = await context.prisma.user({ id: userId }).lists({
+  //     where: {
+  //       listId: listId,
+  //     },
+  //   })
 
-    return existingList && context.prisma.deleteList({ id: existingList.id })
-  },
+  //   return existingList && context.prisma.deleteList({ id: existingList.id })
+  // },
 }
 
 module.exports = {

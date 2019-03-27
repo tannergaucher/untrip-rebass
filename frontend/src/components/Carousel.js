@@ -2,7 +2,6 @@ import React from "react"
 import { Carousel, Heading, Box } from "grommet"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import Link from "../components/styles/Link"
 
 const Image = styled(Img)`
   height: 250px;
@@ -12,6 +11,8 @@ const Image = styled(Img)`
 `
 
 const MyCarousel = ({ images }) => {
+  let id = 1
+
   return (
     <Carousel a11yTitl="image carousel">
       {images.map(image => {
@@ -22,19 +23,23 @@ const MyCarousel = ({ images }) => {
           sourceLink,
           image: { fluid },
         } = image
+
+        id++
+
         return (
-          <Box style={{ position: "relative" }}>
+          <Box style={{ position: "relative" }} key={id}>
             <Image fluid={fluid} />
             <Box
               style={{ position: "absolute", bottom: "10%", left: 15 }}
-              background="black"
-              color="white"
+              background="white"
+              color="black"
               pad="xsmall"
             >
               {description && (
                 <Heading
                   margin="none"
                   level="6"
+                  color="black"
                   style={{ fontFamily: "monospace" }}
                 >
                   {description}
@@ -48,9 +53,9 @@ const MyCarousel = ({ images }) => {
                   margin="none"
                   style={{ fontFamily: "monospace", fontSize: "10px" }}
                 >
-                  <Link to={sourceLink}>
-                    {credit} / {source || ""}
-                  </Link>
+                  <a href={sourceLink}>
+                    {credit} / {source}
+                  </a>
                 </Heading>
               </Box>
             )}

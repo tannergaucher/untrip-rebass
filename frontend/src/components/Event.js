@@ -5,11 +5,10 @@ import Carousel from "../components/Carousel"
 import Details from "./Details"
 import ToggleEventButton from "../components/ToggleEventButton"
 
-const Event = props => {
+function Event(props) {
   const {
     id,
     name: eventName,
-    description,
     eventStarts,
     eventEnds,
     dateTimeCateats,

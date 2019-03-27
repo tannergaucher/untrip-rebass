@@ -38,7 +38,6 @@ const RemoveEvent = ({ eventId }) => {
         <Button
           onClick={removeEvent}
           label="Going"
-          alignSelf="end"
           color="black"
           style={{
             fontSize: "12px",

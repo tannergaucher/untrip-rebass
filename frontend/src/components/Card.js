@@ -1,5 +1,6 @@
 import React from "react"
 import { Heading, Box } from "grommet"
+import { graphql } from "gatsby"
 
 import Share from "../components/Share"
 import Carousel from "../components/Carousel"
@@ -24,3 +25,13 @@ const Card = ({ title, carouselImages, slug }) => {
 }
 
 export default Card
+
+export const cardQuery = graphql`
+  fragment CardFragment on ContentfulPost {
+    title
+    slug
+    carouselImages {
+      ...CarouselImage
+    }
+  }
+`

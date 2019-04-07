@@ -80,15 +80,7 @@ export const eventPageQuery = graphql`
         }
       }
       carouselImages {
-        description
-        credit
-        sourceLink
-        source
-        image {
-          fluid {
-            ...GatsbyContentfulFluid
-          }
-        }
+        ...CarouselImage
       }
     }
   }

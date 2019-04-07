@@ -47,4 +47,5 @@ type Mutation {
   addEvent(eventId: String!): Event
   removeEvent(eventId: String!): Event
   createList(title: String!, placeId: String!): List!
+  deleteList(id: ID): List
 }

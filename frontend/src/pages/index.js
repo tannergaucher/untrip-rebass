@@ -1,54 +1,30 @@
 import React from "react"
-import { Box, Heading } from "grommet"
 
 import Layout from "../components/layout"
 import Container from "../components/styles/Container"
 import Card from "../components/Card"
-import SmallCard from "../components/SmallCard"
+import FeaturedPosts from "../components/FeaturedPosts"
 
 const IndexPage = ({ data }) => {
-  const { edges: latest } = data.latest
-  const { edges: featured } = data.featured
+  const { edges } = data.allContentfulPost
   return (
     <Layout>
       <Container>
         <section>
-          {latest.map(edge => {
-            const { title, slug, id, carouselImages } = edge.node
-
+          {edges.map(edge => {
+            const { node } = edge
             return (
               <Card
-                title={title}
-                carouselImages={carouselImages}
-                slug={slug}
-                id={id}
-                key={id}
+                title={node.title}
+                carouselImages={node.carouselImages}
+                slug={node.slug}
+                id={node.id}
+                key={node.id}
               />
             )
           })}
         </section>
-        <div>
-          {featured.map(edge => {
-            const { category, id } = edge.node
-            const {
-              introSentence,
-              slug,
-              title,
-              cardImage: { fluid },
-            } = edge.node.post_[0]
-            return (
-              <Box key={id}>
-                <Heading level="4">{category}</Heading>
-                <SmallCard
-                  title={title}
-                  intro={introSentence}
-                  fluid={fluid}
-                  slug={slug}
-                />
-              </Box>
-            )
-          })}
-        </div>
+        <FeaturedPosts />
       </Container>
     </Layout>
   )
@@ -58,13 +34,9 @@ export default IndexPage
 
 export const INDEX_PAGE_QUERY = graphql`
   query INDEX_PAGE_QUERY {
-    latest: allContentfulPost {
+    allContentfulPost {
       edges {
         node {
-          id
-          title
-          slug
-          introSentence
           postPlace {
             neighborhood
           }
@@ -72,40 +44,7 @@ export const INDEX_PAGE_QUERY = graphql`
           category {
             category
           }
-          carouselImages {
-            description
-            credit
-            source
-            sourceLink
-            image {
-              fluid {
-                ...GatsbyContentfulFluid
-              }
-            }
-          }
-          cardImage {
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-        }
-      }
-    }
-    featured: allContentfulCategory {
-      edges {
-        node {
-          id
-          category
-          post_ {
-            slug
-            title
-            introSentence
-            cardImage {
-              fluid(maxWidth: 200) {
-                ...GatsbyContentfulFluid
-              }
-            }
-          }
+          ...CardFragment
         }
       }
     }

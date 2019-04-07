@@ -1,56 +1,32 @@
 import React from "react"
 import { Heading, Box, Text } from "grommet"
+import { graphql } from "gatsby"
 
 import Carousel from "../components/Carousel"
-import Details from "./Details"
+import EventDetails from "./EventDetails"
 import ToggleEventButton from "../components/ToggleEventButton"
 
 function Event(props) {
-  const {
-    id,
-    name: eventName,
-    eventStarts,
-    eventEnds,
-    dateTimeCateats,
-    website,
-    facebook,
-    instagram,
-    ticketLink,
-    price,
-    type,
-    place: {
-      name: placeName,
-      location: { neighborhood },
-    },
-    carouselImages,
-    articleText: {
-      childContentfulEventArticleTextEventArticleTextTextNode: {
-        childMarkdownRemark: { html },
-      },
-    },
-  } = props
-
   return (
     <Box margin={{ vertical: "large" }}>
-      <Heading level="2">{eventName}</Heading>
-      <Carousel images={carouselImages} />
-      <Details
-        eventStarts={eventStarts}
-        eventEnds={eventEnds}
-        caveats={dateTimeCateats}
-        price={price}
-        website={website}
-        facebook={facebook}
-        instagram={instagram}
-        tickets={ticketLink}
-        type={type[0].type}
-        place={placeName}
-        neighborhood={neighborhood}
+      <Heading level="2">{props.name}</Heading>
+      <Carousel images={props.carouselImages} />
+      <EventDetails
+        eventStarts={props.eventStarts}
+        eventEnds={props.eventEnds}
+        dateTimeCaveats={props.dateTimeCaveats}
+        price={props.price}
+        website={props.website}
+        facebook={props.facebook}
+        instagram={props.instagram}
+        ticketLink={props.ticketLink}
+        type={props.type.type}
+        neighborhood={props.place.location.neighborhood}
       />
-      <ToggleEventButton eventId={id} name={eventName} />
+      <ToggleEventButton eventId={props.id} name={props.name} />
       <Text
-        size="14px"
-        dangerouslySetInnerHTML={{ __html: html }}
+        size="small"
+        dangerouslySetInnerHTML={{ __html: props.html }}
         margin={{ vertical: "medium" }}
       />
     </Box>
@@ -58,3 +34,24 @@ function Event(props) {
 }
 
 export default Event
+
+export const eventQuery = graphql`
+  fragment Event on ContentfulEvent {
+    id
+    name
+    description
+    ...EventDetails
+
+    articleText {
+      childContentfulEventArticleTextEventArticleTextTextNode {
+        childMarkdownRemark {
+          html
+        }
+      }
+    }
+
+    carouselImages {
+      ...CarouselImage
+    }
+  }
+`

@@ -36,15 +36,7 @@ export const tagPageQuery = graphql`
       tag
       post_ {
         id
-        title
-        slug
-        carouselImages {
-          image {
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-        }
+        ...CardFragment
       }
     }
   }

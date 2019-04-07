@@ -2,6 +2,7 @@ import React from "react"
 import { Carousel, Heading, Box } from "grommet"
 import styled from "styled-components"
 import Img from "gatsby-image"
+import { graphql } from "gatsby"
 
 const Image = styled(Img)`
   height: 250px;
@@ -11,7 +12,7 @@ const Image = styled(Img)`
 `
 
 const MyCarousel = ({ images }) => {
-  let id = 1
+  let id = 0
 
   return (
     <Carousel a11yTitl="image carousel">
@@ -30,18 +31,13 @@ const MyCarousel = ({ images }) => {
           <Box style={{ position: "relative" }} key={id}>
             <Image fluid={fluid} />
             <Box
-              style={{ position: "absolute", bottom: "10%", left: 15 }}
-              background="white"
-              color="black"
+              style={{ position: "absolute", bottom: 50, right: 50 }}
+              background="black"
+              color="white"
               pad="xsmall"
             >
               {description && (
-                <Heading
-                  margin="none"
-                  level="6"
-                  color="black"
-                  style={{ fontFamily: "monospace" }}
-                >
+                <Heading margin="none" level="3">
                   {description}
                 </Heading>
               )}
@@ -67,3 +63,17 @@ const MyCarousel = ({ images }) => {
 }
 
 export default MyCarousel
+
+export const query = graphql`
+  fragment CarouselImage on ContentfulCarouselImage {
+    description
+    credit
+    source
+    sourceLink
+    image {
+      fluid {
+        ...GatsbyContentfulFluid
+      }
+    }
+  }
+`

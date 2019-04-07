@@ -122,8 +122,10 @@ const Mutation = {
         },
       },
     })
-
     return list
+  },
+  deleteList: (parent, { id }, context) => {
+    return context.prisma.deleteList({ id })
   },
 }
 

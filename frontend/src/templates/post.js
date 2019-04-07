@@ -9,84 +9,63 @@ import Place from "../components/Place"
 import Avatar from "../components/Avatar"
 import Share from "../components/Share"
 
-function Post({ data }) {
-  const {
-    title,
-    published,
-    author: {
-      name,
-      socialLink,
-      avatarImage: { fixed: avatarFixed },
-    },
-    cardImage: { fluid },
-    childContentfulPostArticlePreTextNode,
-    childContentfulPostArticleMainTextNode,
-    childContentfulPostArticleAfterTextNode,
-    events,
-    places,
-  } = data.post
-
+function Post({ data: { post } }) {
   return (
     <Layout>
       <Container>
         <Heading level={1} margin={{ vertical: "medium" }}>
-          {title}
+          {post.title}
         </Heading>
-        <Img fluid={fluid} />
+        <Img fluid={post.cardImage.fluid} />
         <Share />
         <Box as="article">
-          {childContentfulPostArticlePreTextNode && (
+          {post.childContentfulPostArticlePreTextNode && (
             <Text
               margin={{ vertical: "medium" }}
               size="medium"
               dangerouslySetInnerHTML={{
                 __html:
-                  childContentfulPostArticlePreTextNode.childMarkdownRemark
+                  post.childContentfulPostArticlePreTextNode.childMarkdownRemark
                     .html,
               }}
             />
           )}
-          {events && (
+          {post.events && (
             <Box as="section">
-              {events.map(event => (
+              {post.events.map(event => (
                 <Event {...event} key={event.id} />
               ))}
             </Box>
           )}
-          {childContentfulPostArticleMainTextNode && (
+          {post.childContentfulPostArticleMainTextNode && (
             <Text
               dangerouslySetInnerHTML={{
                 __html:
-                  childContentfulPostArticleMainTextNode.childMarkdownRemark
-                    .html,
+                  post.childContentfulPostArticleMainTextNode
+                    .childMarkdownRemark.html,
               }}
             />
           )}
-          {places && (
+          {post.places && (
             <Box as="section">
-              {places.map(place => (
+              {post.places.map(place => (
                 <Place {...place} key={place.id} />
               ))}
             </Box>
           )}
-          {childContentfulPostArticleAfterTextNode && (
+          {post.childContentfulPostArticleAfterTextNode && (
             <Text
               as="section"
               margin={{ vertical: "medium" }}
               dangerouslySetInnerHTML={{
                 __html:
-                  childContentfulPostArticleAfterTextNode.childMarkdownRemark
-                    .html,
+                  post.childContentfulPostArticleAfterTextNode
+                    .childMarkdownRemark.html,
               }}
             />
           )}
         </Box>
-        <Avatar
-          name={name}
-          published={published}
-          fixed={avatarFixed}
-          social={socialLink}
-        />
+        <Avatar authorAvatar={post.author} published={post.published} />
       </Container>
     </Layout>
   )
@@ -99,125 +78,39 @@ export const postPageQuery = graphql`
     post: contentfulPost(slug: { eq: $slug }) {
       id
       title
-      published(formatString: "MM/DD/YYYY")
-      author {
-        name
-        socialLink
-        avatarImage {
-          fixed(height: 50, width: 50) {
-            ...GatsbyContentfulFixed
-          }
-        }
-      }
-      carouselImages {
-        description
-        credit
-        source
-        sourceLink
-        image {
-          fluid {
-            ...GatsbyContentfulFluid
-          }
-        }
-      }
+
+      ...AuthorAvatar
+
       cardImage {
         fluid {
           ...GatsbyContentfulFluid
         }
       }
+
       childContentfulPostArticlePreTextNode {
         childMarkdownRemark {
           html
         }
       }
+
       childContentfulPostArticleMainTextNode {
         childMarkdownRemark {
           html
         }
       }
+
       childContentfulPostArticleAfterTextNode {
         childMarkdownRemark {
           html
         }
       }
+
       events @include(if: $containsEvent) {
-        id
-        name
-        description
-        website
-        facebook
-        instagram
-        ticketLink
-        price
-        eventStarts(formatString: "h:mm A")
-        eventEnds(formatString: "h:mm A")
-        dateTimeCaveats
-        type {
-          type
-        }
-        place {
-          name
-          location {
-            neighborhood
-          }
-        }
-        articleText {
-          childContentfulEventArticleTextEventArticleTextTextNode {
-            childMarkdownRemark {
-              html
-            }
-          }
-        }
-        carouselImages {
-          description
-          credit
-          source
-          sourceLink
-          image {
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-        }
+        ...Event
       }
+
       places @include(if: $containsPlace) {
-        id
-        name
-        description
-        openingHours(formatString: "h:mm A")
-        closingHours(formatString: "h:mm A")
-        dateTimeCaveats
-        website
-        facebook
-        instagram
-        address {
-          lat
-          lon
-        }
-        type {
-          placeType
-        }
-        carouselImages {
-          description
-          credit
-          source
-          sourceLink
-          image {
-            fluid {
-              ...GatsbyContentfulFluid
-            }
-          }
-        }
-        location {
-          country
-          city
-          neighborhood
-        }
-        placeArticleText {
-          childContentfulRichText {
-            html
-          }
-        }
+        ...Place
       }
     }
   }

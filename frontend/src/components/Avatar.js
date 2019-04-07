@@ -1,6 +1,7 @@
 import React from "react"
 import { Text, Box } from "grommet"
 import Img from "gatsby-image"
+import { graphql } from "gatsby"
 
 const SmallText = ({ text }) => (
   <Text level="6" margin="none" color="dark-3" style={{ fontSize: "12px" }}>
@@ -8,19 +9,22 @@ const SmallText = ({ text }) => (
   </Text>
 )
 
-function Avatar({ fixed, published, name, social }) {
+function Avatar({ authorAvatar, published }) {
   return (
-    <a href={social} style={{ textDecoration: "none" }}>
+    <a href={authorAvatar.socialLink} style={{ textDecoration: "none" }}>
       <Box
         direction="row"
         justify="end"
         align="center"
         margin={{ vertical: "medium" }}
       >
-        <Img fixed={fixed} style={{ borderRadius: "50%" }} />
+        <Img
+          fixed={authorAvatar.avatarImage.fixed}
+          style={{ borderRadius: "50%" }}
+        />
         <Box margin={{ left: "small" }}>
           <SmallText text={published} />
-          <SmallText text={name} />
+          <SmallText text={authorAvatar.name} />
         </Box>
       </Box>
     </a>
@@ -28,3 +32,18 @@ function Avatar({ fixed, published, name, social }) {
 }
 
 export default Avatar
+
+export const query = graphql`
+  fragment AuthorAvatar on ContentfulPost {
+    published(formatString: "MM/DD/YYYY")
+    author {
+      name
+      socialLink
+      avatarImage {
+        fixed(height: 50, width: 50) {
+          ...GatsbyContentfulFixed
+        }
+      }
+    }
+  }
+`

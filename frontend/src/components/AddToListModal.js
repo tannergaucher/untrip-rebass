@@ -8,7 +8,6 @@ import {
   DropButton,
   Box,
 } from "grommet"
-
 import { Close, Add as AddIcon } from "grommet-icons"
 
 import User from "../containers/User"

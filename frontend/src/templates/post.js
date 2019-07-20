@@ -13,9 +13,7 @@ function Post({ data: { post } }) {
   return (
     <Layout>
       <Container>
-        <Heading level={1} margin={{ vertical: "medium" }}>
-          {post.title}
-        </Heading>
+        <Heading level={1}>{post.title}</Heading>
         <Img fluid={post.cardImage.fluid} />
         <Share />
         <Box as="article">

@@ -13,44 +13,34 @@ const Image = styled(Img)`
 
 const MyCarousel = ({ images }) => {
   let id = 0
-
   return (
     <Carousel a11yTitl="image carousel">
       {images.map(image => {
-        const {
-          credit,
-          description,
-          source,
-          sourceLink,
-          image: { fluid },
-        } = image
-
         id++
-
         return (
-          <Box style={{ position: "relative" }} key={id}>
-            <Image fluid={fluid} />
+          <Box style={{ position: "relative" }} key={image.id}>
+            <Image fluid={image.image.fluid} />
             <Box
               style={{ position: "absolute", bottom: 50, right: 50 }}
               background="black"
               color="white"
               pad="xsmall"
             >
-              {description && (
+              {image.description && (
                 <Heading margin="none" level="3">
-                  {description}
+                  {image.description}
                 </Heading>
               )}
             </Box>
-            {credit && (
+            {image.credit && image.sourceLink && (
               <Box style={{ position: "absolute", bottom: 5, right: 10 }}>
                 <Heading
                   level="6"
                   margin="none"
                   style={{ fontFamily: "monospace", fontSize: "10px" }}
                 >
-                  <a href={sourceLink}>
-                    {credit} / {source}
+                  <a href={image.sourceLink}>
+                    {image.credit} / {image.source}
                   </a>
                 </Heading>
               </Box>

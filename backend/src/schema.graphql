@@ -1,3 +1,8 @@
+# import User from './generated/prisma.graphql'
+# import Event from './generated/prisma.graphql'
+# import Place from './generated/prisma.graphql'
+# import List from './generated/prisma.graphql'
+
 scalar DateTime
 
 type SuccessMessage {
@@ -6,33 +11,6 @@ type SuccessMessage {
 
 type Query {
   me: User
-}
-
-type Event {
-  eventId: String!
-  users: [User!]
-}
-
-type User {
-  id: ID!
-  email: String!
-  password: String!
-  name: String
-  events: [Event!]
-  lists: [List!]!
-}
-
-type Place {
-  id: ID!
-  placeId: String!
-  list: List!
-}
-
-type List {
-  id: ID!
-  title: String!
-  user: User!
-  places: [Place]
 }
 
 type AuthPayload {

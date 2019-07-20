@@ -9,7 +9,7 @@ const Header = ({ title }) => (
     direction="row"
     justify="between"
     align="center"
-    background={{ color: "white" }}
+    // background={{ color: "white" }}
     style={{ position: "sticky", top: 0, zIndex: 2, opacity: ".97" }}
   >
     <Link to="/">

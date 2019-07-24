@@ -2,51 +2,30 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Button } from "grommet"
 
-import Layout from "../components/layout"
-import Map from "../components/Map"
-import Carousel from "../components/Carousel"
+import { Map } from "../components/place"
+import { Layout, Carousel } from "../components/elements"
+import { Container, Link, Detail } from "../components/styles"
 
-import Container from "../components/styles/Container"
-import Link from "../components/styles/Link"
-
-const placePage = ({ data }) => {
-  const {
-    name,
-    description,
-    website,
-    facebook,
-    instagram,
-    openingHours,
-    closingHours,
-    dateTimeCaveats,
-    address: { lon, lat },
-    type: { placeType },
-    location: { city, neighborhood },
-    post_,
-    carouselImages,
-  } = data.place
-
+export default function PlacePage({ data }) {
+  const { place } = data
   return (
     <Layout>
       <Container width={[1]}>
-        <Carousel images={carouselImages} />
-
-        <h1>{name}</h1>
-        <p>{description}</p>
-
+        <Carousel images={place.carouselImages} />
+        <h1>{place.name}</h1>
+        <h3>{place.description}</h3>
         <Button label="Add To / Added to `list`" />
-
-        <p>{website}</p>
-        <p>{facebook}</p>
-        <p>{instagram}</p>
-        <p>{openingHours}</p>
-        <p>{closingHours}</p>
-        <p>{dateTimeCaveats}</p>
-        <p>{placeType}</p>
-        <p>{city}</p>
-        <p>{neighborhood}</p>
-
+        <Detail>{place.websiteLink}</Detail>
+        <Detail>{place.facebookLink}</Detail>
+        <Detail>{place.instagramLink}</Detail>
+        <Detail>{place.openingHours}</Detail>
+        <Detail>{place.closingHours}</Detail>
+        <Detail>{place.dateTimeCaveats}</Detail>
+        <Detail>{place.placeType}</Detail>
+        <Detail>{place.location.city}</Detail>
+        <Detail>{place.location.neighborhood}</Detail>
         <h5>In these posts: </h5>
+        {/* TODO: Related posts components */}
         {post_.map(post => (
           <>
             <Link to={post.slug}>
@@ -54,12 +33,11 @@ const placePage = ({ data }) => {
             </Link>
           </>
         ))}
-
         <Map
-          name={name}
-          title={name}
-          lat={lat}
-          lng={lon}
+          name={place.name}
+          title={place.name}
+          lat={place.lat}
+          lng={place.lon}
           style={{ height: "40%" }}
           zoom={15}
         />
@@ -67,8 +45,6 @@ const placePage = ({ data }) => {
     </Layout>
   )
 }
-
-export default placePage
 
 export const placePageQuery = graphql`
   query($name: String!) {

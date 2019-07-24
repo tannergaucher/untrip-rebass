@@ -1,11 +1,17 @@
+import React from "react"
 import styled from "styled-components"
 
-const Fieldset = styled.fieldset`
-  border: none;
-  display: flex;
-  flex-direction: column;
-  /* fieldset has padding by default */
-  padding-left: 0;
-`
-
-export default Fieldset
+export default function Fieldset({ children }) {
+  return (
+    <fieldset
+      style={{
+        border: "none",
+        display: "flex",
+        flexDirection: "column",
+        paddingLeft: "none",
+      }}
+    >
+      {children}
+    </fieldset>
+  )
+}

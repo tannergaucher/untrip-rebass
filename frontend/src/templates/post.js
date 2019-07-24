@@ -1,15 +1,16 @@
 import React from "react"
-import { Heading, Text, Box } from "grommet"
 import Img from "gatsby-image"
+import { Heading, Text, Box } from "grommet"
 
-import Layout from "../components/layout"
-import Container from "../components/styles/Container"
-import Event from "../components/Event"
-import Place from "../components/Place"
-import Avatar from "../components/Avatar"
-import Share from "../components/Share"
+import { Event } from "../components/event"
+import { Place } from "../components/place"
+import { Share } from "../components/post"
+import { Avatar } from "../components/user"
+import { Layout, Container } from "../components/styles"
 
-function Post({ data: { post } }) {
+export default function Post({ data }) {
+  const { post } = data
+
   return (
     <Layout>
       <Container>
@@ -68,8 +69,6 @@ function Post({ data: { post } }) {
     </Layout>
   )
 }
-
-export default Post
 
 export const postPageQuery = graphql`
   query($slug: String!, $containsEvent: Boolean!, $containsPlace: Boolean!) {

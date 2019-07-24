@@ -5,10 +5,9 @@ import { Query } from "react-apollo"
 import { kebabCase } from "lodash"
 import gql from "graphql-tag"
 
-import Card from "../components/Card"
-import Container from "../components/styles/Container"
-import Layout from "../components/layout"
-import Link from "../components/styles/Link"
+import { Card } from "../components/post"
+import { Container, Link } from "../components/styles"
+import { Layout } from "../components/elements"
 
 const SELECTED_TAGS_QUERY = gql`
   query {

@@ -1,11 +1,10 @@
 import React from "react"
 
-import Layout from "../components/layout"
-import Container from "../components/styles/Container"
-import Card from "../components/Card"
-import FeaturedPosts from "../components/FeaturedPosts"
+import { Layout } from "../components/elements"
+import { Container } from "../components/styles"
+import { Card, FeaturedPosts } from "../components/post"
 
-const IndexPage = ({ data }) => {
+export default function IndexPage({ data }) {
   const { edges } = data.allContentfulPost
   return (
     <Layout>
@@ -15,11 +14,11 @@ const IndexPage = ({ data }) => {
             const { node } = edge
             return (
               <Card
-                title={node.title}
-                carouselImages={node.carouselImages}
-                slug={node.slug}
                 id={node.id}
                 key={node.id}
+                slug={node.slug}
+                title={node.title}
+                carouselImages={node.carouselImages}
               />
             )
           })}
@@ -30,8 +29,7 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export default IndexPage
-
+// Make Into Hook.
 export const INDEX_PAGE_QUERY = graphql`
   query INDEX_PAGE_QUERY {
     allContentfulPost {

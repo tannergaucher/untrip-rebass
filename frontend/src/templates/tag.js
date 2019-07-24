@@ -2,33 +2,28 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Heading } from "grommet"
 
-import Card from "../components/Card"
-import Container from "../components/styles/Container"
-import Layout from "../components/layout"
+import { Layout } from "../components/elements"
+import { Card } from "../components/post"
+import { Container } from "../components/styles"
 
-const tagPage = ({ data }) => {
+export default function TagPage({ data }) {
   const { tag, post_ } = data.contentfulTag
   return (
     <Layout>
       <Container>
         <Heading>{tag}</Heading>
-        {post_.map(post => {
-          const { id, title, slug, carouselImages } = post
-          return (
-            <Card
-              title={title}
-              slug={slug}
-              carouselImages={carouselImages}
-              key={id}
-            />
-          )
-        })}
+        {post_.map(post => (
+          <Card
+            title={post.title}
+            slug={post.slug}
+            carouselImages={post.carouselImages}
+            key={post.id}
+          />
+        ))}
       </Container>
     </Layout>
   )
 }
-
-export default tagPage
 
 export const tagPageQuery = graphql`
   query($tag: String!) {

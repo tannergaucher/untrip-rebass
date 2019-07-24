@@ -1,12 +1,16 @@
-import styled from "styled-components"
+import React from "react"
 import Link from "gatsby-link"
+import styled from "styled-components"
 
-import { color } from "styled-system"
-
-const MyLink = styled(Link)`
-  ${color};
-  color: black;
-  text-decoration: none;
-`
-
-export default MyLink
+export default function MyLink({ children }) {
+  return (
+    <Link
+      style={{
+        textDecoration: "none",
+        color: "black",
+      }}
+    >
+      {children}
+    </Link>
+  )
+}

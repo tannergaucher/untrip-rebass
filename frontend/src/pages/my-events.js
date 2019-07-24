@@ -3,15 +3,15 @@ import { graphql } from "gatsby"
 import { Box, Heading } from "grommet"
 import { kebabCase } from "lodash"
 
-import Layout from "../components/layout"
-import User from "../containers/User"
-import PleaseSignin from "../containers/PleaseSignin"
-import RemoveEvent from "../containers/RemoveEvent"
-import Container from "../components/styles/Container"
-import Link from "../components/styles/Link"
-// import Calendar from "../components/Calendar"
+import { Layout } from "../components/elements"
+import { User } from "../components/user"
+import { PleaseSignin } from "../components/auth"
+import { RemoveEvent } from "../components/event"
+import { Container, Link } from "../components/styles"
 
-const myEvents = ({ data }) => {
+// const myEvents = ({ data }) => {
+
+export default function MyEventsPage({ data }) {
   const { edges: allEvents } = data.allContentfulEvent
   return (
     <Layout>
@@ -20,9 +20,7 @@ const myEvents = ({ data }) => {
           {({ data, loading, error }) => {
             if (loading) return <p>loading...</p>
             if (error) return <p>{error.message}</p>
-
             const { events } = data.me
-
             // todo: clean this up
             const going = events.map(event => {
               const goingNodes = []
@@ -37,7 +35,6 @@ const myEvents = ({ data }) => {
             return (
               <Container>
                 <Heading textAlign="center">My Events</Heading>
-                {/* <Calendar /> */}
                 {going.map(event => {
                   const { id, name } = event[0].node
                   return (
@@ -58,7 +55,7 @@ const myEvents = ({ data }) => {
   )
 }
 
-export default myEvents
+// Make into hook useAllEvents
 export const allEventsQuery = graphql`
   query allEventsQuery {
     allContentfulEvent {
